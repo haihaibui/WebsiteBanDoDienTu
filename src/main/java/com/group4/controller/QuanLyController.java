@@ -67,7 +67,6 @@ public class QuanLyController {
 	        return "QuanLy/Layout/QuanLyDonHang :: content";
 	    }
 	    
-	    
 	    return "QuanLy/QuanLyIndex";
 	}
 	
