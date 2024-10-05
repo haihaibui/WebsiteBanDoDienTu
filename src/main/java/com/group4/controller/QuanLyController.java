@@ -11,6 +11,7 @@ import com.group4.dao.DonHangDAO;
 import com.group4.dao.NguoiDungDAO;
 import com.group4.dao.SanPhamDAO;
 import com.group4.entity.DonHang;
+import com.group4.entity.NguoiDung;
 import com.group4.entity.SanPham;
 import com.group4.service.SessionService;
 
@@ -69,6 +70,21 @@ public class QuanLyController {
 	    
 	    return "QuanLy/QuanLyIndex";
 	}
+	
+	@GetMapping("/QuanLy/QuanLyNguoiDung")
+	public String quanLyNguoiDung(Model model) {
+		session.set("vietLam", "QuanLyNguoiDung");
+		List<NguoiDung> listNd = ndDao.findAll();
+		model.addAttribute("listNd",listNd);
+		
+		//Kiểm tra nếu là yêu cầu AJAX
+		if("XMLHttpRequest".equals(request.getHeader("X-Requested-with"))) {
+			return "QuanLy/layout/QuanLyNguoiDung :: content";
+		}
+		
+		return "QuanLy/QuanLyIndex";
+	}
+	
 	
 	@GetMapping("/QuanLy/QuanLySanPham")
 	public String quanLySanPham(Model model) {
