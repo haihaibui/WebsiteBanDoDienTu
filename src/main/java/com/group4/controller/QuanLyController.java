@@ -53,7 +53,6 @@ public class QuanLyController {
 	    if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
 	        return "QuanLy/Layout/ThongKe :: content";
 	    }
-	    
 	    return "QuanLy/QuanLyIndex";
 	}
 	
