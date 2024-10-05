@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body th:fragment="content">
+	<div
+		class="fs-5 w-100 bodyPart  rounded-3 mb-3 d-flex justify-content-lg-between titleDonHangText fw-normal text-center">
+		<div class="py-3">Tất cả đơn</div>
+		<div class="py-3">Chờ xác nhận</div>
+		<div class="py-3">Đang xử lý</div>
+		<div class="py-3">Đang vận chuyển</div>
+		<div class="py-3">Đã giao hàng</div>
+		<div class="py-3">Đã hủy</div>
+	</div>
+	<div class="fs-4 w-100 bodyPart px-3 py-3 rounded-3"
+		style="height: 700px;">
+		<span class="titleText fw-bold ms-1">Danh sách tất cả đơn hàng</span>
+		<table class="table bodyPart mt-3">
+			<thead class="fs-5">
+				<tr>
+					<th scope="col">Mã DH</th>
+					<th scope="col">Ngày lập</th>
+					<th scope="col">Mã ND</th>
+					<th scope="col">Trạng thái</th>
+					<th scope="col">Trang thái</th>
+				</tr>
+			</thead>
+			<tbody class="fw-lighter fs-5">
+				<tr th:each="dh : ${listDh}">
+					<td class="pt-3" th:text="${dh.maDonHang}"></td>
+					<td class="pt-3" th:text="${dh.ngayLapDon}"></td>
+					<td class="pt-3" th:text="${dh.maNd}"></td>
+					<td class="pt-3" th:text="${dh.trangThai}"></td>
+					<td class="ps-3">
+						<a href="#"><img alt="" class="img-fluid" th:src="@{/image/QuanLy/editIcon.png}"></a>
+						<a href="#"><img alt="" class="img-fluid" th:src="@{/image/QuanLy/deleteIcon.png}"></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+</body>
+</html>

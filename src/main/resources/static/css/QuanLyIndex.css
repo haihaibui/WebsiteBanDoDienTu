@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+.menuAside {
+	background-color: rgba(167, 154, 175);
+}
+
+.menuAside button {
+	cursor: pointer;
+	transition: background-color 1s, color 1s, border-color 1s;
+	/* Thêm hiệu ứng chuyển đổi */
+}
+
+/*Định dạng cho button menu sau khi đc nhấn*/
+.buttonMenuSelected {
+	background-color: #755FFF !important;
+	color: #FFFFFF !important;
+	border-color: #755FFF !important;
+}
+
+.body {
+	background-color: rgba(240, 240, 240);
+}
+
+.bodyPart {
+	background-color: rgba(255, 255, 255);
+}
+
+.titleText {
+	color: rgba(143, 85, 200);
+}
+
+.titleDonHangText {
+	color: rgba(126, 126, 126);
+}
+
+/*Định dạng của thẻ trạng thái trong đơn hàng sau khi ấn*/
+.selectedTitleDonHang {
+	color: rgba(143, 85, 200);
+	font-weight: 650;
+	border-bottom: 5px solid rgba(143, 85, 200);
+}
+
+.titleDonHangText div {
+	cursor: pointer;
+	/*Làm cho thẻ div hiện bàn tay khi di chuột vào*/
+	flex: 1;
+	/*Làm các thẻ div có độ rộng bằng nhau*/
+	transition: color 0.5s ease, border-bottom 0.5s ease, transform 0.5s
+		ease;
+	/* Thêm hiệu ứng chuyển đổi */
+}

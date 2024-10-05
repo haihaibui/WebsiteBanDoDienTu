@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body th:fragment="content">
+	<div class="px-3 mb-3">
+		<div class="row">
+			<div class="pe-3 ps-1 col-md-4">
+				<div class="bodyPart rounded-4 text-center d-block py-3">
+					<img th:src="@{/image/QuanLy/thongKeUser.png}" class="img-fluid"
+						style="height: 215px;">
+					<div class="text-center fw-bolder fs-1 mt-1">[[${soLuongNd}]]</div>
+					<div class="text-center fs-5 fst-italic" style="font-weight: 330;">
+						Số lượng người dùng</div>
+				</div>
+			</div>
+			<div class="px-3 col-md-4">
+				<div class="bodyPart rounded-4 text-center d-block py-3">
+					<img th:src="@{/image/QuanLy/thongKeSp.png}" class="img-fluid"
+						style="height: 215px;">
+					<div class="text-center fw-bolder fs-1 mt-1">[[${soLuongSp}]]</div>
+					<div class="text-center fs-5 fst-italic" style="font-weight: 330;">
+						Số lượng sản phẩm</div>
+				</div>
+			</div>
+			<div class="ps-3 pe-1 col-md-4">
+				<div class="bodyPart rounded-4 text-center d-block py-3">
+					<img th:src="@{/image/QuanLy/thongKeDH.png}" class="img-fluid"
+						style="height: 215px;">
+					<div class="text-center fw-bolder fs-1 mt-1">[[${soLuongDh}]]</div>
+					<div class="text-center fs-5 fst-italic" style="font-weight: 330;">
+						Số lượng đơn hàng</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="fs-4 w-100 bodyPart px-4 py-3 rounded-3"
+		style="height: 420px;">
+		<span class="titleText fw-bold">Thống kê doanh thu theo tháng</span>
+	</div>
+
+</body>
+</html>
