@@ -16,7 +16,9 @@ import com.group4.dao.ThuocTinhDacBietDAO;
 import com.group4.entity.ChungLoai;
 import com.group4.entity.DonHang;
 import com.group4.entity.NguoiDung;
+import com.group4.entity.NhaCungCap;
 import com.group4.entity.SanPham;
+import com.group4.entity.ThuocTinhDacBiet;
 import com.group4.service.SessionService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -114,6 +116,30 @@ public class QuanLyController {
 		// Kiểm tra nếu đây là yêu cầu AJAX
 	    if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
 	        return "QuanLy/Layout/QuanLyChungLoai :: content";
+	    }
+		return "QuanLy/QuanLyIndex";
+	}
+	
+	@GetMapping("/QuanLy/QuanLyNhaCungCap")
+	public String quanLyNhaCungCap(Model model) {
+		session.set("viecLam", "QuanLyNhaCungCap");
+		List<NhaCungCap> listNcc = nccDao.findAll();
+		model.addAttribute("listNcc",listNcc);
+		// Kiểm tra nếu đây là yêu cầu AJAX
+	    if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+	        return "QuanLy/Layout/QuanLyNhaCungCap :: content";
+	    }
+		return "QuanLy/QuanLyIndex";
+	}
+	
+	@GetMapping("/QuanLy/QuanLyThuocTinhDacBiet")
+	public String quanLyThuocTinhDacBiet(Model model) {
+		session.set("viecLam", "QuanLyThuocTinhDacBiet");
+		List<ThuocTinhDacBiet> listTtdb = ttdbDao.findAll();
+		model.addAttribute("listTtdb",listTtdb);
+		// Kiểm tra nếu đây là yêu cầu AJAX
+	    if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+	        return "QuanLy/Layout/QuanLyThuocTinhDacBiet :: content";
 	    }
 		return "QuanLy/QuanLyIndex";
 	}

@@ -37,11 +37,11 @@
 						class="btn btn-light fs-5 w-100 fw-medium rounded-4 text-start ps-4 mb-4 mt-2 py-2">
 						<i class="fa-solid fa-list me-3"></i>Chủng loại
 					</button>
-					<button type="submit"
+					<button type="submit" onclick="loadContent('/QuanLy/QuanLyNhaCungCap')"
 						class="btn btn-light fs-5 w-100 fw-medium rounded-4 text-start ps-4 mb-4 mt-2 py-2">
 						<i class="fa-solid fa-tag me-3"></i>Nhà cung cấp
 					</button>
-					<button type="submit"
+					<button type="submit" onclick="loadContent('/QuanLy/QuanLyThuocTinhDacBiet')"
 						class="btn btn-light fs-5 w-100 fw-medium rounded-4 text-start ps-4 mb-4 mt-2 py-2">
 						<i class="fa-solid fa-star me-2"></i>Thuộc tính đặc biệt
 					</button>
@@ -64,7 +64,7 @@
 				 <!-- Div sẽ được cập nhật động bằng AJAX -->
 				<div id="content" class="content-area">
 					<!-- Nội dung mặc định của DonHang -->
-					<div th:replace="~{/QuanLy/Layout/QuanLyDonHang :: content}"></div>
+					<div th:replace="~{/QuanLy/Layout/ThongKe :: content}"></div>
 				</div>
 
 			</div>
