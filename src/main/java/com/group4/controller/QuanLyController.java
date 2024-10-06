@@ -7,9 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.group4.dao.ChungLoaiDAO;
 import com.group4.dao.DonHangDAO;
 import com.group4.dao.NguoiDungDAO;
+import com.group4.dao.NhaCungCapDAO;
 import com.group4.dao.SanPhamDAO;
+import com.group4.dao.ThuocTinhDacBietDAO;
+import com.group4.entity.ChungLoai;
 import com.group4.entity.DonHang;
 import com.group4.entity.NguoiDung;
 import com.group4.entity.SanPham;
@@ -31,6 +35,15 @@ public class QuanLyController {
 	
 	@Autowired
 	NguoiDungDAO ndDao;
+	
+	@Autowired
+	ChungLoaiDAO clDao;
+	
+	@Autowired
+	NhaCungCapDAO nccDao;
+	
+	@Autowired
+	ThuocTinhDacBietDAO ttdbDao;
 	
 	@Autowired
 	HttpServletRequest request;
@@ -61,12 +74,10 @@ public class QuanLyController {
 		session.set("viecLam", "QuanLyDonHang");
 		List<DonHang> listDh = dhDao.findAll();
 		model.addAttribute("listDh",listDh);
-		
 		// Kiểm tra nếu đây là yêu cầu AJAX
 	    if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
 	        return "QuanLy/Layout/QuanLyDonHang :: content";
-	    }
-	    
+	    } 
 	    return "QuanLy/QuanLyIndex";
 	}
 	
@@ -75,12 +86,10 @@ public class QuanLyController {
 		session.set("vietLam", "QuanLyNguoiDung");
 		List<NguoiDung> listNd = ndDao.findAll();
 		model.addAttribute("listNd",listNd);
-		
 		//Kiểm tra nếu là yêu cầu AJAX
 		if("XMLHttpRequest".equals(request.getHeader("X-Requested-with"))) {
 			return "QuanLy/layout/QuanLyNguoiDung :: content";
 		}
-		
 		return "QuanLy/QuanLyIndex";
 	}
 	
@@ -90,12 +99,22 @@ public class QuanLyController {
 		session.set("viecLam", "QuanLySanPham");
 		List<SanPham> listSp = spDao.findAll();
 		model.addAttribute("listSp",listSp);
-		
 		// Kiểm tra nếu đây là yêu cầu AJAX
 	    if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
 	        return "QuanLy/Layout/QuanLySanPham :: content";
 	    }
-	    
+		return "QuanLy/QuanLyIndex";
+	}
+	
+	@GetMapping("/QuanLy/QuanLyChungLoai")
+	public String quanLyChungLoai(Model model) {
+		session.set("viecLam", "QuanLyChungLoai");
+		List<ChungLoai> listCl = clDao.findAll();
+		model.addAttribute("listCl",listCl);
+		// Kiểm tra nếu đây là yêu cầu AJAX
+	    if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+	        return "QuanLy/Layout/QuanLyChungLoai :: content";
+	    }
 		return "QuanLy/QuanLyIndex";
 	}
 	
