@@ -17,7 +17,7 @@ import com.group4.entity.ThuocTinhDacBiet;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/RestApi/ThuocTinhDacBiet")
+@RequestMapping("/api/ThuocTinhDacBiet")
 public class ThuocTinhDacBietRestController {
 
 	@Autowired

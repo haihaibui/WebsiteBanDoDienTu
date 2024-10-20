@@ -17,7 +17,7 @@ import com.group4.entity.SanPham;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/RestApi/SanPham")
+@RequestMapping("/api/SanPham")
 public class SanPhamRestController {
 
 	@Autowired

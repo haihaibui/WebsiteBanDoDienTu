@@ -42,6 +42,6 @@ public class DonHang {
 
     // Mối quan hệ với DonHangChiTiet
     @JsonIgnore
-    @OneToMany(mappedBy = "donHang", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "donHang", cascade = CascadeType.ALL)
     private Set<DonHangChiTiet> donHangChiTiets;
 }

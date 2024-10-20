@@ -64,11 +64,11 @@ public class SanPham {
 
     // Mối quan hệ với GioHang
     @JsonIgnore
-    @OneToMany(mappedBy = "sanPham", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "sanPham", cascade = CascadeType.ALL)
     private Set<GioHang> gioHangs;
 
     // Mối quan hệ với DonHangChiTiet
     @JsonIgnore
-    @OneToMany(mappedBy = "sanPham", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "sanPham", cascade = CascadeType.ALL)
     private Set<DonHangChiTiet> donHangChiTiets;
 }

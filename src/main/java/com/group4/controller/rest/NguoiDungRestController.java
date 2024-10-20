@@ -17,7 +17,7 @@ import com.group4.entity.NguoiDung;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/RestApi/NguoiDung")
+@RequestMapping("/api/NguoiDung")
 public class NguoiDungRestController {
 
 	@Autowired

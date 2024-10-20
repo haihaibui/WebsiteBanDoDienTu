@@ -21,7 +21,7 @@ import com.group4.entity.ChungLoai;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/RestApi/ChungLoai")
+@RequestMapping("/api/ChungLoai")
 public class ChungLoaiRestController {
 	
 	@Autowired

@@ -17,7 +17,7 @@ import com.group4.entity.NhaCungCap;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/RestApi/NhaCungCap")
+@RequestMapping("/api/NhaCungCap")
 public class NhaCungCapRestController {
 
 	@Autowired

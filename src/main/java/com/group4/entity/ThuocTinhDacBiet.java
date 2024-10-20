@@ -25,6 +25,6 @@ public class ThuocTinhDacBiet {
 
     // Mối quan hệ với SanPham
     @JsonIgnore
-    @OneToMany(mappedBy = "thuocTinhDacBiet", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "thuocTinhDacBiet", cascade = CascadeType.ALL)
     private Set<SanPham> sanPhams;
 }

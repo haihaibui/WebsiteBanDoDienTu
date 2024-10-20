@@ -17,7 +17,7 @@ import com.group4.entity.DonHang;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/RestApi/DonHang")
+@RequestMapping("/api/DonHang")
 public class DonHangRestController {
 	
 	@Autowired
