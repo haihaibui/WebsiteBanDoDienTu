@@ -19,7 +19,7 @@ import com.group4.entity.NguoiDung;
 import com.group4.entity.NhaCungCap;
 import com.group4.entity.SanPham;
 import com.group4.entity.ThuocTinhDacBiet;
-import com.group4.service.SessionService;
+import com.group4.util.SessionUtil;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -27,7 +27,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public class QuanLyController {
 	
 	@Autowired
-	SessionService session;
+	SessionUtil session;
 	
 	@Autowired
 	SanPhamDAO spDao;

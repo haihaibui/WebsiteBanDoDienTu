@@ -1,4 +1,4 @@
-package com.group4.service;
+package com.group4.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Service
-public class CookieService {
+public class CookieUtil {
 	
 	@Autowired
 	HttpServletRequest req;

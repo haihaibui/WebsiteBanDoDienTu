@@ -1,4 +1,4 @@
-package com.group4.service;
+package com.group4.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Service
-public class ParamService {
+public class ParamUtil {
 
 	@Autowired
 	HttpServletRequest req;
