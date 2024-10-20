@@ -8,6 +8,8 @@ import jakarta.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -39,6 +41,7 @@ public class DonHang {
     private NguoiDung nguoiDung;
 
     // Mối quan hệ với DonHangChiTiet
+    @JsonIgnore
     @OneToMany(mappedBy = "donHang", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<DonHangChiTiet> donHangChiTiets;
 }

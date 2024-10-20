@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,6 +24,7 @@ public class ChungLoai {
     private String tenChungLoai;
 
     // Mối quan hệ với SanPham
-    @OneToMany(mappedBy = "chungLoai", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    @OneToMany(mappedBy = "chungLoai", cascade = CascadeType.ALL) //bỏ orphanRemoval = true
     private Set<SanPham> sanPhams;
 }

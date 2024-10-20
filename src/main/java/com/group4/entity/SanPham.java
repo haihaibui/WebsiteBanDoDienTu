@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -61,10 +63,12 @@ public class SanPham {
     private ThuocTinhDacBiet thuocTinhDacBiet;
 
     // Mối quan hệ với GioHang
+    @JsonIgnore
     @OneToMany(mappedBy = "sanPham", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<GioHang> gioHangs;
 
     // Mối quan hệ với DonHangChiTiet
+    @JsonIgnore
     @OneToMany(mappedBy = "sanPham", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<DonHangChiTiet> donHangChiTiets;
 }
