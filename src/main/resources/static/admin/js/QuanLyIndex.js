@@ -6,33 +6,59 @@ app.controller('myCtrl', function ($http, $scope) {
 app.config(function ($routeProvider) {
     $routeProvider
         .when('/ThongKe', {
-            templateUrl: '/QuanLy/layout/ThongKe.html',
+            templateUrl: '/admin/html/layout/ThongKe.html',
             controller: 'thongKeCtrl'
         })
-        .when('/QuanLyChungloai', {
-            templateUrl: '/QuanLy/layout/QuanLyChungloai.html',
-            controller: 'QuanLyChungloaiCtrl'
-        })
         .when('/QuanLyDonHang', {
-            templateUrl: '/QuanLy/layout/QuanLyDonHang.html',
+            templateUrl: '/admin/html/layout/QuanLyDonHang.html',
             controller: 'QuanLyDonHangCtrl'
         })
+        .when('/QuanLyNguoiDung', {
+            templateUrl: '/admin/html/layout/QuanLyNguoiDung.html',
+            controller: 'QuanLyNguoiDungCtrl'
+        })
+        .when('/QuanLySanPham', {
+            templateUrl: '/admin/html/layout/QuanLySanPham.html',
+            controller: 'QuanLySanPhamCtrl'
+        })
+        .when('/QuanLyChungloai', {
+            templateUrl: '/admin/html/layout/QuanLyChungloai.html',
+            controller: 'QuanLyChungloaiCtrl'
+        })
+        .when('/QuanLyNhaCungCap', {
+            templateUrl: '/admin/html/layout/QuanLyNhaCungCap.html',
+            controller: 'QuanLyNhaCungCapCtrl'
+        })
+        .when('/QuanLyThuocTinhDacBiet', {
+            templateUrl: '/admin/html/layout/QuanLyThuocTinhDacBiet.html',
+            controller: 'QuanLyThuocTinhDacBietCtrl'
+        })
         .otherwise({
-            templateUrl: '/QuanLy/layout/ThongKe.html',
+            templateUrl: '/admin/html/layout/ThongKe.html',
             controller: 'thongKeCtrl'
         })
 })
 app.controller('thongKeCtrl',function($http, $scope){
 
 })
-app.controller('QuanLyChungloaiCtr',function($http, $scope){
-
+app.controller('QuanLyNguoiDungCtrl',function($http, $scope){
+	
 })
 app.controller('QuanLyDonHangCtrl',function($http, $scope){
+	attachOrderButtonEvents()
+})
+app.controller('QuanLySanPhamCtrl',function($http, $scope){
+	
+})
+app.controller('QuanLyChungloaiCtrl',function($http, $scope){
 
 })
-
-
+app.controller('QuanLyNhaCungCapCtrl',function($http, $scope){
+	
+})
+app.controller('QuanLyThuocTinhDacBietCtrl',function($http, $scope){
+	
+})
 
 
 
