@@ -1,6 +1,41 @@
-/**
- * 
- */
+//Angular Js code
+var app = angular.module('myApp', ['ngRoute']);
+app.controller('myCtrl', function ($http, $scope) {
+    
+})
+app.config(function ($routeProvider) {
+    $routeProvider
+        .when('/ThongKe', {
+            templateUrl: '/QuanLy/layout/ThongKe.html',
+            controller: 'thongKeCtrl'
+        })
+        .when('/QuanLyChungloai', {
+            templateUrl: '/QuanLy/layout/QuanLyChungloai.html',
+            controller: 'QuanLyChungloaiCtrl'
+        })
+        .when('/QuanLyDonHang', {
+            templateUrl: '/QuanLy/layout/QuanLyDonHang.html',
+            controller: 'QuanLyDonHangCtrl'
+        })
+        .otherwise({
+            templateUrl: '/QuanLy/layout/ThongKe.html',
+            controller: 'thongKeCtrl'
+        })
+})
+app.controller('thongKeCtrl',function($http, $scope){
+
+})
+app.controller('QuanLyChungloaiCtr',function($http, $scope){
+
+})
+app.controller('QuanLyDonHangCtrl',function($http, $scope){
+
+})
+
+
+
+
+
 // Đảm bảo các sự kiện được gắn khi trang lần đầu tải
 document.addEventListener("DOMContentLoaded", function() {
 	//Bắt sự kiện khi bấm vào button bên menuAside
@@ -17,28 +52,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	//Gắn sự kiện cho các nút tab dơn hàng
 	attachOrderButtonEvents();
 })
-
-
-function loadContent(url) {
-	// Sử dụng AJAX để gửi yêu cầu GET tới server
-	fetch(url, {
-		method: 'GET',
-		headers: {
-			'X-Requested-With': 'XMLHttpRequest' // Đảm bảo request là AJAX
-		}
-	})
-		.then(response => response.text()) // Lấy nội dung từ response
-		.then(html => {
-			// Cập nhật nội dung của phần tử có id="content"
-			document.getElementById('content').innerHTML = html;
-			// Gắn lại sự kiện sau khi nội dung được tải lại
-        	attachOrderButtonEvents();
-		})
-		.catch(error => {
-			console.error('Lỗi khi tải nội dung:', error);
-		});
-}
-
 
 // Hàm gắn sự kiện cho các nút trong tab Đơn hàng
 function attachOrderButtonEvents() {
@@ -60,4 +73,24 @@ function attachOrderButtonEvents() {
 	)
 }
 
-
+/*
+function loadContent(url) {
+	// Sử dụng AJAX để gửi yêu cầu GET tới server
+	fetch(url, {
+		method: 'GET',
+		headers: {
+			'X-Requested-With': 'XMLHttpRequest' // Đảm bảo request là AJAX
+		}
+	})
+		.then(response => response.text()) // Lấy nội dung từ response
+		.then(html => {
+			// Cập nhật nội dung của phần tử có id="content"
+			document.getElementById('content').innerHTML = html;
+			// Gắn lại sự kiện sau khi nội dung được tải lại
+        	attachOrderButtonEvents();
+		})
+		.catch(error => {
+			console.error('Lỗi khi tải nội dung:', error);
+		});
+}
+*/

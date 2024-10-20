@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.group4.dao.ChungLoaiDAO;
 import com.group4.dao.DonHangDAO;
@@ -26,6 +27,12 @@ import jakarta.servlet.http.HttpServletRequest;
 @Controller
 public class QuanLyController {
 	
+	@GetMapping("/QuanLy")
+	public String quanLyIndex() {
+		return "QuanLy/QuanLyIndex";
+	}
+	
+	/*
 	@Autowired
 	SessionUtil session;
 	
@@ -143,5 +150,5 @@ public class QuanLyController {
 	    }
 		return "QuanLy/QuanLyIndex";
 	}
-	
+	*/
 }
