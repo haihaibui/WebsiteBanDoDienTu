@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -23,12 +23,12 @@
 				</tr>
 			</thead>
 			<tbody class="fw-light fs-5">
-				<tr th:each="ttdb : ${listTtdb}">
-					<td class="pt-4" th:text="${ttdb.maThuocTinhDacBiet}"></td>
-					<td class="pt-4" th:text="${ttdb.tenThuocTinhDacBiet}"></td>
+				<tr ng-repeat = "ttdb in items">
+					<td class="pt-4" >{{ttdb.maThuocTinhDacBiet}}</td>
+					<td class="pt-4" >{{ttdb.tenThuocTinhDacBiet}}</td>
 					<td class="ps-3 pt-3">
-						<a href="#"><img alt="" class="img-fluid" th:src="@{/image/QuanLy/editIcon.png}"></a>
-						<a href="#"><img alt="" class="img-fluid" th:src="@{/image/QuanLy/deleteIcon.png}"></a>
+						<a href="#"><img alt="" class="img-fluid" src="/admin/image/editIcon.png"></a>
+						<a href="#"><img alt="" class="img-fluid" src="/admin/image/deleteIcon.png"></a>
 					</td>
 				</tr>
 			</tbody>

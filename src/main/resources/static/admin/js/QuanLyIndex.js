@@ -50,15 +50,6 @@ app.controller('QuanLyDonHangCtrl',function($http, $scope){
 app.controller('QuanLySanPhamCtrl',function($http, $scope){
 	
 })
-app.controller('QuanLyChungloaiCtrl',function($http, $scope){
-
-})
-app.controller('QuanLyNhaCungCapCtrl',function($http, $scope){
-	
-})
-app.controller('QuanLyThuocTinhDacBietCtrl',function($http, $scope){
-	
-})
 
 
 

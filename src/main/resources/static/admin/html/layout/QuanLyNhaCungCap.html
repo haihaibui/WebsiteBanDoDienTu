@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -23,12 +23,12 @@
 				</tr>
 			</thead>
 			<tbody class="fw-light fs-5">
-				<tr th:each="ncc : ${listNcc}">
-					<td class="pt-4" th:text="${ncc.maNhaCungCap}"></td>
-					<td class="pt-4" th:text="${ncc.tenNhaCungCap}"></td>
+				<tr ng-repeat="ncc in items">
+					<td class="pt-4" >{{ncc.maNhaCungCap}}</td>
+					<td class="pt-4" >{{ncc.tenNhaCungCap}}</td>
 					<td class="ps-3 pt-3">
-						<a href="#"><img alt="" class="img-fluid" th:src="@{/image/QuanLy/editIcon.png}"></a>
-						<a href="#"><img alt="" class="img-fluid" th:src="@{/image/QuanLy/deleteIcon.png}"></a>
+						<a href="#"><img alt="" class="img-fluid" src="/admin/image/editIcon.png"></a>
+						<a href="#"><img alt="" class="img-fluid" src="/admin/image/deleteIcon.png"></a>
 					</td>
 				</tr>
 			</tbody>
