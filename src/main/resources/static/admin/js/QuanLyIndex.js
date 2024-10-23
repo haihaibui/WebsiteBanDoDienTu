@@ -1,3 +1,5 @@
+let host = "http://localhost:8080/api"
+
 //Angular Js code
 var app = angular.module('myApp', ['ngRoute']);
 app.controller('myCtrl', function ($http, $scope) {
@@ -40,12 +42,6 @@ app.config(function ($routeProvider) {
 })
 app.controller('thongKeCtrl',function($http, $scope){
 
-})
-app.controller('QuanLyNguoiDungCtrl',function($http, $scope){
-	
-})
-app.controller('QuanLyDonHangCtrl',function($http, $scope){
-	attachOrderButtonEvents()
 })
 app.controller('QuanLySanPhamCtrl',function($http, $scope){
 	

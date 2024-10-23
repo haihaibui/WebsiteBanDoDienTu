@@ -1,11 +1,9 @@
 app.controller('QuanLyNhaCungCapCtrl',function($http, $scope){
-	
-	let host = "http://localhost:8080/api/NhaCungCap"
-	
+		
 	$scope.items = []
 	
 	$scope.load_all = function(){
-		var url = `${host}`
+		var url = `${host}/NhaCungCap`
 		$http.get(url).then(resp =>{
 			$scope.items = resp.data
 			console.log("Success load all NhaCungCap")

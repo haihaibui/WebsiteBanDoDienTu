@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body th:fragment="content">
+<body>
 	<div
 		class="fs-5 w-100 bodyPart  rounded-3 mb-3 d-flex justify-content-lg-between titleDonHangText fw-normal text-center">
 		<div class="py-3">Tất cả đơn</div>
@@ -21,21 +21,21 @@
 			<thead class="fs-5">
 				<tr>
 					<th scope="col">Mã DH</th>
-					<th scope="col">Ngày lập</th>
 					<th scope="col">Mã ND</th>
+					<th scope="col">Ngày lập đơn</th>					
 					<th scope="col">Trạng thái</th>
-					<th scope="col">Trang thái</th>
+					<th scope="col">Hàng động</th>
 				</tr>
 			</thead>
 			<tbody class="fw-light fs-5">
-				<tr th:each="dh : ${listDh}">
-					<td class="pt-3" th:text="${dh.maDonHang}"></td>
-					<td class="pt-3" th:text="${dh.ngayLapDon}"></td>
-					<td class="pt-3" th:text="${dh.maNd}"></td>
-					<td class="pt-3" th:text="${dh.trangThai}"></td>
+				<tr ng-repeat = "dh in items">
+					<td class="pt-3" >{{dh.maDonHang}}</td>
+					<td class="pt-3" >{{dh.nguoiDung.maNguoiDung}}</td>
+					<td class="pt-3" >{{dh.ngayLapDon}}</td>
+					<td class="pt-3" >{{dh.trangThai}}</td>
 					<td class="ps-3">
-						<a href="#"><img alt="" class="img-fluid" th:src="@{/image/QuanLy/editIcon.png}"></a>
-						<a href="#"><img alt="" class="img-fluid" th:src="@{/image/QuanLy/deleteIcon.png}"></a>
+						<a href="#"><img alt="" class="img-fluid" src="/admin/image/editIcon.png"></a>
+						<a href="#"><img alt="" class="img-fluid" src="/admin/image/deleteIcon.png"></a>
 					</td>
 				</tr>
 			</tbody>

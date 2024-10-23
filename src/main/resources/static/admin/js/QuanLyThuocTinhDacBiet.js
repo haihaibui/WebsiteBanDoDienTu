@@ -1,11 +1,9 @@
 app.controller('QuanLyThuocTinhDacBietCtrl',function($http, $scope){
-	
-	let host = "http://localhost:8080/api/ThuocTinhDacBiet"
-	
+		
 	$scope.items = []
 	
 	$scope.load_all = function(){
-		var url = `${host}`
+		var url = `${host}/ThuocTinhDacBiet`
 		$http.get(url).then(resp => {
 			$scope.items = resp.data
 			console.log("Success load all TTDB")
