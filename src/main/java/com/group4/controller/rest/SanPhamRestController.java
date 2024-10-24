@@ -41,4 +41,10 @@ public class SanPhamRestController {
 		return ResponseEntity.ok(sp.get());
 	}
 	
+	@GetMapping("SoLuong")
+	public ResponseEntity<Integer> restGetSoLuongSp(){
+		int soLuong = (int)spDao.count();
+		return ResponseEntity.ok(soLuong);
+	}
+	
 }

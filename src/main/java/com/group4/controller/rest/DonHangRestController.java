@@ -32,6 +32,12 @@ public class DonHangRestController {
 		return ResponseEntity.ok(listDh);
 	}
 	
+	@GetMapping("SoLuong")
+	public ResponseEntity<Integer> restGetSoLuongDh(){
+		int soLuong = (int) dhDao.count();
+		return ResponseEntity.ok(soLuong);
+	}
+	
 	@GetMapping("{id}")
 	public ResponseEntity<DonHang> restGetDhById(@PathVariable("id") Integer id){
 		Optional<DonHang> dh = dhDao.findById(id);
@@ -39,6 +45,15 @@ public class DonHangRestController {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(dh.get());
+	}
+	
+	@GetMapping("/TrangThai/{x}")
+	public ResponseEntity<Collection<DonHang>> restGetDhByTrangThai(@PathVariable("x") String x){
+		List<DonHang> listDh = dhDao.findAllByTrangThaiLike(x);
+		if(listDh.isEmpty()) {
+			return ResponseEntity.noContent().build();
+		}
+		return ResponseEntity.ok(listDh);
 	}
 	
 }

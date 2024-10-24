@@ -41,4 +41,10 @@ public class NguoiDungRestController {
 		return ResponseEntity.ok(nd.get());
 	}
 	
+	@GetMapping("SoLuongKhachHang")
+	public ResponseEntity<Integer> restGetSoLuongKhachHang(){
+		List<NguoiDung> listKh = ndDao.findAllByVaiTroLike("Khách hàng");
+		return ResponseEntity.ok(listKh.size());
+	}
+	
 }
