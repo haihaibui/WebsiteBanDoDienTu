@@ -26,9 +26,9 @@
 				<tr ng-repeat="cl in items">
 					<td class="pt-4">{{cl.maChungLoai}}</td>
 					<td class="pt-4">{{cl.tenChungLoai}}</td>
-					<td class="ps-3 pt-3"><img alt="" class="me-2" ng-click = "load_by_id(cl.maChungLoai)" data-bs-toggle="modal" data-bs-target="#modalChungLoai"
-							class="img-fluid" src="/admin/image/editIcon.png"><img alt="" class="img-fluid"
-							src="/admin/image/deleteIcon.png"></td>
+					<td class="ps-3 pt-3"><img alt="" class="img-fluid me-2 imgAction" ng-click="load_by_id(cl.maChungLoai)" data-bs-toggle="modal" data-bs-target="#modalChungLoai"
+						src="/admin/image/editIcon.png">
+						<img alt="" class="img-fluid imgAction" src="/admin/image/deleteIcon.png" ng-click="delete(cl.maChungLoai)"></td>
 				</tr>
 			</tbody>
 		</table>
@@ -41,16 +41,16 @@
 		<div class="modal-dialog pt-3">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h1 class="modal-title fs-4 fw-bold" id="staticBackdropLabel" ng-if="work_type == 'ThemMoi'">Thêm
+					<h1 class="modal-title fs-4 fw-bold" id="staticBackdropLabel" ng-hide="update">Thêm
 						chủng loại mới</h1>
-					<h1 class="modal-title fs-4 fw-bold" id="staticBackdropLabel" ng-if="work_type == 'CapNhat'">Cập nhật chủng loại</h1>
+					<h1 class="modal-title fs-4 fw-bold" id="staticBackdropLabel" ng-show="update">Cập nhật chủng loại</h1>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<div class="input-group mb-3">
 						<span class="input-group-text text-bg-secondary" id="basic-addon1">Mã
-							chủng loại</span> <input type="text" class="form-control" ng-model = "form.maChungLoai"
+							chủng loại</span> <input type="text" class="form-control" ng-model = "form.maChungLoai" ng-readonly="update"	
 							aria-label="Username" aria-describedby="basic-addon1">
 					</div>
 					<div class="input-group mb-3">
@@ -62,15 +62,15 @@
 				</div>
 				<div class="modal-footer">
 					<!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
-					<button type="button" class="btn p-0 m-0 me-3" ng-if="work_type == 'ThemMoi'">
+					<button type="button" class="btn p-0 m-0 me-3" ng-hide="update" ng-click="reset()">
 						<img src="/admin/image/resetBtn.png" class="img-fluid"
 							style="height: 40px;">
 					</button>
-					<button type="button" class="btn p-0 m-0" ng-if="work_type == 'ThemMoi'">
+					<button type="button" class="btn p-0 m-0" ng-hide="update" ng-click="create()">
 						<img src="/admin/image/themBtn.png" class="img-fluid" 
 							style="height: 44px;">
 					</button>
-					<button type="button" class="btn p-0 m-0 me-1" ng-if="work_type == 'CapNhat'">
+					<button type="button" class="btn p-0 m-0 me-1" ng-show="update" ng-click="update_cl(form.maChungLoai)">
 						<img src="/admin/image/capNhatBtn.png" class="img-fluid" 
 							style="height: 46px;">
 					</button>

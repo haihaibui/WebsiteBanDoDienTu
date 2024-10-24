@@ -49,3 +49,7 @@
 		ease;
 	/* Thêm hiệu ứng chuyển đổi */
 }
+
+.imgAction{
+	cursor: pointer;
+}
