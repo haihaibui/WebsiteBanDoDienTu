@@ -34,12 +34,93 @@
 					<td class="pt-3" >{{dh.ngayLapDon}}</td>
 					<td class="pt-3" >{{dh.trangThai}}</td>
 					<td class="ps-3">
-						<a href="#"><img alt="" class="img-fluid" src="/admin/image/editIcon.png"></a>
-						<a href="#"><img alt="" class="img-fluid" src="/admin/image/deleteIcon.png"></a>
+						<img alt="" class="img-fluid imgAction me-2" src="/admin/image/editIcon.png" ng-click="load_by_id(dh.maDonHang)" data-bs-toggle="modal" data-bs-target="#modalDonHang">
+						<img alt="" class="img-fluid imgAction" src="/admin/image/deleteIcon.png">
 					</td>
 				</tr>
 			</tbody>
 		</table>
+	</div>
+	
+	<!-- Modal đơn hàng -->
+	<div class="modal modal-lg fade" id="modalDonHang"
+		data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog pt-3">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-4 fw-bold" id="staticBackdropLabel" >Cập nhật đơn hàng</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-6 px-2">
+							<div class="input-group mb-3">
+								<span class="input-group-text text-bg-secondary" id="basic-addon1">Mã đơn hàng</span> <input type="text" class="form-control" readonly="readonly"	
+									aria-label="Username" aria-describedby="basic-addon1" ng-model="form.maDonHang">
+							</div>
+							<div class="input-group ">
+								<span class="input-group-text text-bg-secondary" id="basic-addon1">Ngày lập đơn</span> <input type="text" class="form-control" readonly="readonly"
+									aria-label="Username" aria-describedby="basic-addon1" ng-model="form.ngayLapDon">
+							</div>
+						</div>
+						<div class="col-md-6 px-2">
+							<div class="input-group mb-3">
+								<span class="input-group-text text-bg-secondary" id="basic-addon1">Mã người đặt</span> <input type="text" class="form-control" readonly="readonly"	
+									aria-label="Username" aria-describedby="basic-addon1" ng-model="form.nguoiDung.maNguoiDung">
+							</div>
+							<div class="input-group ">
+								<label class="input-group-text text-bg-secondary" for="inputGroupSelect01">Trạng thái</label>
+								  <select class="form-select" id="inputGroupSelect01" ng-model="form.trangThai">
+								    <option value="Chờ xác nhận">Chờ xác nhận</option>
+								    <option value="Đang xử lý">Đang xử lý</option>
+								    <option value="Đang vận chuyển">Đang vận chuyển</option>
+								    <option value="Đã giao">Đã giao hàng</option>
+								    <option value="Đã hủy">Đã hủy</option>
+								  </select>
+							</div>
+						</div>
+					</div>
+					<div class="form-floating pt-3 mb-4">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" ng-model="form.diaChiGiao"
+                            style="height: 100px" readonly="readonly"></textarea>
+                        <label for="floatingTextarea2">Địa chỉ</label>
+                    </div>
+                    
+                    <table class="table table-bordered px-2">
+					  <thead>
+					  	<tr>
+					  		<th colspan="4" class="text-center text-bg-secondary fs-5">Chi tiết đơn hàng</th>
+					  	</tr>
+					    <tr>
+					      <th scope="col">Mã sản phẩm </th>
+					      <th scope="col">Tên sản phẩm </th>
+					      <th scope="col">Số lượng</th>
+					      <th scope="col">Giá tiền</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr ng-repeat="dhct in list_dhct">
+					      <td>{{dhct.sanPham.maSanPham}}</td>
+					      <td>{{dhct.sanPham.tenSanPham}}</td>
+					      <td>{{dhct.soLuong}}</td>
+					      <td>{{dhct.giaTien}} VND</td>
+					    </tr>
+					    <tr>
+					    	<td colspan="4" class="text-center">Tổng tiền: {{sum_money}} VND</td>
+					    </tr>
+					  </tbody>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn p-0 m-0 me-1">
+						<img src="/admin/image/capNhatBtn.png" class="img-fluid" 
+							style="height: 46px;">
+					</button>
+				</div>
+			</div>
+		</div>
 	</div>
 	
 </body>
