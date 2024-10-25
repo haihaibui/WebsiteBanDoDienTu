@@ -40,9 +40,7 @@ app.config(function ($routeProvider) {
             controller: 'thongKeCtrl'
         })
 })
-app.controller('QuanLySanPhamCtrl',function($http, $scope){
-	
-})
+
 
 
 
