@@ -35,7 +35,7 @@
 					<td class="pt-3" >{{dh.trangThai}}</td>
 					<td class="ps-3">
 						<img alt="" class="img-fluid imgAction me-2" src="/admin/image/editIcon.png" ng-click="load_by_id(dh.maDonHang)" data-bs-toggle="modal" data-bs-target="#modalDonHang">
-						<img alt="" class="img-fluid imgAction" src="/admin/image/deleteIcon.png">
+						<img alt="" class="img-fluid imgAction" src="/admin/image/deleteIcon.png" ng-click="delete(dh.maDonHang)">
 					</td>
 				</tr>
 			</tbody>
@@ -58,17 +58,17 @@
 						<div class="col-md-6 px-2">
 							<div class="input-group mb-3">
 								<span class="input-group-text text-bg-secondary" id="basic-addon1">Mã đơn hàng</span> <input type="text" class="form-control" readonly="readonly"	
-									aria-label="Username" aria-describedby="basic-addon1" ng-model="form.maDonHang">
+									aria-label="Username" aria-describedby="basic-addon1" ng-model="form.maDonHang" ng-click="instruction()">
 							</div>
 							<div class="input-group ">
 								<span class="input-group-text text-bg-secondary" id="basic-addon1">Ngày lập đơn</span> <input type="text" class="form-control" readonly="readonly"
-									aria-label="Username" aria-describedby="basic-addon1" ng-model="form.ngayLapDon">
+									aria-label="Username" aria-describedby="basic-addon1" ng-model="form.ngayLapDon" ng-click="instruction()">
 							</div>
 						</div>
 						<div class="col-md-6 px-2">
 							<div class="input-group mb-3">
 								<span class="input-group-text text-bg-secondary" id="basic-addon1">Mã người đặt</span> <input type="text" class="form-control" readonly="readonly"	
-									aria-label="Username" aria-describedby="basic-addon1" ng-model="form.nguoiDung.maNguoiDung">
+									aria-label="Username" aria-describedby="basic-addon1" ng-model="form.nguoiDung.maNguoiDung" ng-click="instruction()">
 							</div>
 							<div class="input-group ">
 								<label class="input-group-text text-bg-secondary" for="inputGroupSelect01">Trạng thái</label>
@@ -84,7 +84,7 @@
 					</div>
 					<div class="form-floating pt-3 mb-4">
                         <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" ng-model="form.diaChiGiao"
-                            style="height: 100px" readonly="readonly"></textarea>
+                            style="height: 100px" readonly="readonly" ng-click="instruction()"></textarea>
                         <label for="floatingTextarea2">Địa chỉ</label>
                     </div>
                     
@@ -115,7 +115,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn p-0 m-0 me-1">
-						<img src="/admin/image/capNhatBtn.png" class="img-fluid" 
+						<img src="/admin/image/capNhatBtn.png" class="img-fluid" ng-click="update(form.maDonHang)"
 							style="height: 46px;">
 					</button>
 				</div>
