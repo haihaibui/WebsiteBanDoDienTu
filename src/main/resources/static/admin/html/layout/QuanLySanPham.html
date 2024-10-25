@@ -9,7 +9,7 @@
 		class="fs-4 w-100 bodyPart mb-3 px-3 py-2 rounded-3 d-flex justify-content-between">
 		<span class="titleText fw-bold ms-1">Thêm sản phẩm mới</span>
 		<button type="button"
-			class="btn btn-success px-4 py-2 rounded-4 fw-bold" data-bs-toggle="modal" data-bs-target="#modalThemSanPham">Thêm</button>
+			class="btn btn-success px-4 py-2 rounded-4 fw-bold" data-bs-toggle="modal" data-bs-target="#modalSanPham" ng-click="reset()">Thêm</button>
 	</div>
 	<div class="fs-4 w-100 bodyPart px-3 py-3 rounded-3"
 		style="height: 700px;">
@@ -33,8 +33,8 @@
 					<td class="pt-4">{{sp.giaTien}}</td>
 					<td class="pt-4">{{sp.soLuong}}</td>
 					<td class="ps-3 pt-4">
-						<a href="#"><img alt="" class="img-fluid" src="/admin/image/editIcon.png"></a>
-						<a href="#"><img alt="" class="img-fluid" src="/admin/image/deleteIcon.png"></a>
+						<img alt="" data-bs-toggle="modal" data-bs-target="#modalSanPham" ng-click="load_by_id(sp.maSanPham)" class="img-fluid me-2" src="/admin/image/editIcon.png">
+						<img alt="" class="img-fluid" src="/admin/image/deleteIcon.png">
 					</td>
 				</tr>
 			</tbody>
@@ -42,12 +42,13 @@
 	</div>
 	
 	<!-- Modal them san pham -->
-	<div class="modal modal-lg fade" id="modalThemSanPham" data-bs-backdrop="static" data-bs-keyboard="false"
+	<div class="modal modal-lg fade" id="modalSanPham" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog pt-3">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-4 fw-bold" id="staticBackdropLabel">Thêm sản phẩm mới</h1>
+                    <h1 class="modal-title fs-4 fw-bold" id="staticBackdropLabel" ng-hide="update">Thêm sản phẩm mới</h1>
+                    <h1 class="modal-title fs-4 fw-bold" id="staticBackdropLabel" ng-show="update">Cập nhật sản phẩm</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -55,44 +56,38 @@
                         <div class="col-md-7">
                             <div class="input-group mb-3">
                                 <span class="input-group-text text-bg-secondary" id="basic-addon1">Mã sản phẩm</span>
-                                <input type="text" class="form-control" aria-label="Username"
+                                <input type="text" class="form-control" aria-label="Username" ng-model="form.maSanPham"
                                     aria-describedby="basic-addon1">
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text text-bg-secondary" id="basic-addon1">Tên sản phẩm</span>
-                                <input type="text" class="form-control" aria-label="Username"
+                                <input type="text" class="form-control" aria-label="Username" ng-model="form.tenSanPham"
                                     aria-describedby="basic-addon1">
                             </div>
                             <div class="input-group mb-3">
                                 <label class="input-group-text text-bg-secondary" for="inputGroupSelect01">Mã chủng
                                     loại</label>
-                                <select class="form-select" id="inputGroupSelect01">
-                                    <option selected>Choose...</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                <select class="form-select" id="inputGroupSelect01" ng-model="form.chungLoai.maChungLoai">         
+                                    <option ng-repeat="cl in list_cl" ng-value="cl.maChungLoai">{{cl.tenChungLoai}}</option>
                                 </select>
                             </div>
                             <div class="input-group mb-3">
                                 <label class="input-group-text text-bg-secondary" for="inputGroupSelect01">Mã nhà cung
                                     cấp</label>
-                                <select class="form-select" id="inputGroupSelect01">
-                                    <option selected>Choose...</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                <select class="form-select" id="inputGroupSelect01" ng-model="form.nhaCungCap.maNhaCungCap">
+                                    <option ng-repeat="ncc in list_ncc" ng-value="ncc.maNhaCungCap">{{ncc.tenNhaCungCap}}</option>
                                 </select>
                             </div>
                             <div
                                 class="d-flex justify-content-between align-items-center mb-3 border border-secondary-subtle rounded pe-2">
                                 <div class="text-bg-secondary p-2">Trạng thái</div>
                                 <div class="form-check pe-4">
-                                    <input class="form-check-input" type="radio" name="trangThai" checked="checked"
-                                        value="" id="flexRadioDefault1"> <label class="form-check-label"
+                                    <input class="form-check-input" type="radio" name="trangThai" checked="checked" ng-model="form.trangThai"
+                                        ng-value="true" id="flexRadioDefault1"> <label class="form-check-label"
                                         for="flexRadioDefault1">Đã kích hoạt</label>
                                 </div>
                                 <div class="form-check pe-4">
-                                    <input class="form-check-input" type="radio" name="trangThai" value=""
+                                    <input class="form-check-input" type="radio" name="trangThai" ng-value="false" ng-model="form.trangThai"
                                         id="flexRadioDefault2"> <label class="form-check-label"
                                         for="flexRadioDefault2">Vô hiệu hóa</label>
                                 </div>
@@ -100,24 +95,23 @@
                             <div class="input-group mb-3">
                                 <label class="input-group-text text-bg-secondary" for="inputGroupSelect01">Mã thuộc tính
                                     đặc biệt</label>
-                                <select class="form-select" id="inputGroupSelect01">
-                                    <option selected>Choose...</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                <select class="form-select" id="inputGroupSelect01" ng-model="form.thuocTinhDacBiet.maThuocTinhDacBiet">
+                                    <option ng-repeat="ttdb in list_ttdb" ng-value="ttdb.maThuocTinhDacBiet">{{ttdb.tenThuocTinhDacBiet}}</option>
                                 </select>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="number" placeholder="Nhập số lượng" aria-label="First name"
+                                <input type="number" placeholder="Nhập số lượng" aria-label="First name" ng-model="form.soLuong"
                                     class="form-control">
-                                <input type="number" placeholder="Nhập giá tiền" aria-label="Last name"
+                                <span class="input-group-text text-bg-secondary">Sản phẩm</span>
+                                <input type="number" placeholder="Nhập giá tiền" aria-label="Last name" ng-model="form.giaTien"
                                     class="form-control">
                                 <span class="input-group-text text-bg-secondary">VNĐ</span>
                             </div>
 
                         </div>
                         <div class="col-md-5 px-3 py-4 d-block text-center">
-                            <img th:src="@{/image/SanPham/defaultProductPhoto.png}" class="img-fluid" style="height: 290px;cursor: pointer;">
+                            <img src="/api/file/SanPham/defaultProductPhoto.png" ng-if="form.hinhAnh == null" class="img-fluid" style="height: 290px;cursor: pointer;">
+                            <img ng-src="/api/file/SanPham/{{form.hinhAnh}}" ng-if="form.hinhAnh != null" class="img-fluid" style="height: 290px;cursor: pointer;">
                             <span class="fs-6 fw-light fst-italic">Mẹo: ấn vào hình để chỉnh sửa</span>
                         </div>
                     </div>
@@ -131,10 +125,12 @@
                 </div>
                 <div class="modal-footer">
                     <!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
-                    <button type="button" class="btn p-0 m-0 me-3"><img th:src="@{/image/QuanLy/resetBtn.png}" class="img-fluid"
+                    <button type="button" class="btn p-0 m-0 me-3"><img src="/admin/image/resetBtn.png" class="img-fluid" ng-hide="update"
                             style="height: 40px;"></button>
-                    <button type="button" class="btn p-0 m-0"><img th:src="@{/image/QuanLy/themBtn.png}" class="img-fluid"
+                    <button type="button" class="btn p-0 m-0"><img src="/admin/image/themBtn.png" class="img-fluid" ng-hide="update"
                             style="height: 44px;"></button>
+                     <button type="button" class="btn p-0 m-0"><img src="/admin/image/capNhatBtn.png" class="img-fluid" ng-show="update"
+                            style="height: 48px;"></button>
                 </div>
             </div>
         </div>
