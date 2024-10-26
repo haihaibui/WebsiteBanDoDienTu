@@ -112,7 +112,7 @@
                         <div class="col-md-5 px-3 py-4 d-block text-center">             
                             <img ng-src="{{ temp_image_src || (form.hinhAnh?'/api/file/SanPham/' + form.hinhAnh:default_image_src)}}" class="img-fluid" 
                             	style="height: 285px;cursor: pointer;" ng-click="image_click()">
-                            <input type="file" style="display: none" id="inputFile" >
+                            <input type="file" style="display: none" id="inputFile" accept="image/*">
                             <br>
                             <span class="fs-6 fw-light fst-italic">Mẹo: ấn vào hình để chỉnh sửa</span>
                         </div>

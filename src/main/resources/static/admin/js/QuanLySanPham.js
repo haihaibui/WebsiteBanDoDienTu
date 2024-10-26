@@ -81,6 +81,10 @@ app.controller('QuanLySanPhamCtrl', function($http, $scope) {
 	document.getElementById('inputFile').addEventListener('change', function(event) {
 		var input = event.target;
 		if (input.files && input.files[0]) {
+			var file = input.files[0];
+        	var fileName = file.name; // Tên file bao gồm cả đuôi, ví dụ: "example.png"
+       	 	console.log("File name:", fileName);
+			// Đọc file để hiển thị ảnh base64
 			var reader = new FileReader()
 			reader.onload = function(e) {
 				$scope.$apply(function() {
