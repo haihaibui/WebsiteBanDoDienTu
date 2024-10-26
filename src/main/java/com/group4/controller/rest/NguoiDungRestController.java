@@ -7,8 +7,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,6 +49,34 @@ public class NguoiDungRestController {
 	public ResponseEntity<Integer> restGetSoLuongKhachHang(){
 		List<NguoiDung> listKh = ndDao.findAllByVaiTroLike("Khách hàng");
 		return ResponseEntity.ok(listKh.size());
+	}
+	
+	@PostMapping()
+	public ResponseEntity<NguoiDung> restPostNguoiDung(@RequestBody NguoiDung nd ){
+		if(ndDao.existsById(nd.getMaNguoiDung())) {
+			return ResponseEntity.badRequest().build();
+		}
+		ndDao.save(nd);
+		return ResponseEntity.ok(nd);
+	}
+	
+	@PutMapping("{id}")
+	public ResponseEntity<NguoiDung> restPutNguoiDung(@RequestBody NguoiDung nd, @PathVariable("id") String id){
+		Optional<NguoiDung> nguoiDung = ndDao.findById(id);
+		if(nguoiDung.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+		ndDao.save(nd);
+		return ResponseEntity.ok(nd);
+	}
+	
+	@DeleteMapping("{id}")
+	public ResponseEntity<Void> restDeleteNguoiDung(@PathVariable("id") String id){
+		if(!ndDao.existsById(id)) {
+			return ResponseEntity.notFound().build();
+		}
+		ndDao.deleteById(id);
+		return ResponseEntity.ok().build();
 	}
 	
 }
