@@ -26,5 +26,15 @@ public class FileManagerRestController {
 		}
 		return ResponseEntity.ok(file);
 	}
+
 	
+	@GetMapping("/NguoiDung/{name}")
+	public ResponseEntity<byte[]> downloadNd(@PathVariable("name") String name){
+		byte[] file = fileService.read("/static/image/NguoiDung", name);
+		if(file==null) {
+			ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(file);
+	}
+
 }
