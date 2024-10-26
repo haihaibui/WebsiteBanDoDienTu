@@ -109,9 +109,11 @@
                             </div>
 
                         </div>
-                        <div class="col-md-5 px-3 py-4 d-block text-center">
-                            <img src="/api/file/SanPham/defaultProductPhoto.png" ng-if="form.hinhAnh == null" class="img-fluid" style="height: 290px;cursor: pointer;">
-                            <img ng-src="/api/file/SanPham/{{form.hinhAnh}}" ng-if="form.hinhAnh != null" class="img-fluid" style="height: 290px;cursor: pointer;">
+                        <div class="col-md-5 px-3 py-4 d-block text-center">             
+                            <img ng-src="{{ temp_image_src || (form.hinhAnh?'/api/file/SanPham/' + form.hinhAnh:default_image_src)}}" class="img-fluid" 
+                            	style="height: 285px;cursor: pointer;" ng-click="image_click()">
+                            <input type="file" style="display: none" id="inputFile" >
+                            <br>
                             <span class="fs-6 fw-light fst-italic">Mẹo: ấn vào hình để chỉnh sửa</span>
                         </div>
                     </div>
