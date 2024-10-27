@@ -12,11 +12,16 @@ app.controller('QuanLySanPhamCtrl', function($http, $scope) {
 
 	$scope.default_image_src = "/api/file/SanPham/defaultProductPhoto.png"
 
+	$scope.temp_image_data = null
+
+	$scope.file = null
+
 	//Reset lại form
 	$scope.reset = function() {
 		$scope.form = {}
 		$scope.update = false
-		$scope.temp_image_src = null
+		$scope.temp_image_data = null
+		$scope.file = null
 	}
 
 	//Load tất cả sản phẩm
@@ -34,8 +39,8 @@ app.controller('QuanLySanPhamCtrl', function($http, $scope) {
 	$scope.load_by_id = function(maSp) {
 		var url = `${host}/SanPham/${maSp}`
 		$http.get(url).then(resp => {
+			$scope.reset()
 			$scope.form = resp.data
-			$scope.temp_image_src = null
 			$scope.update = true;
 		}).catch(error => {
 			console.log("Error load SanPham By Id", error)
@@ -81,19 +86,91 @@ app.controller('QuanLySanPhamCtrl', function($http, $scope) {
 	document.getElementById('inputFile').addEventListener('change', function(event) {
 		var input = event.target;
 		if (input.files && input.files[0]) {
-			var file = input.files[0];
-        	var fileName = file.name; // Tên file bao gồm cả đuôi, ví dụ: "example.png"
-       	 	console.log("File name:", fileName);
+			$scope.file = input.files[0];
+			var fileName = $scope.file.name; // Tên file bao gồm cả đuôi, ví dụ: "example.png"
+			console.log("File name:", fileName);
 			// Đọc file để hiển thị ảnh base64
 			var reader = new FileReader()
 			reader.onload = function(e) {
 				$scope.$apply(function() {
-					$scope.temp_image_src = e.target.result; // Cập nhật hiển thị tạm thời
+					$scope.temp_image_data = e.target.result; // Cập nhật hiển thị tạm thời
 				})
 			}
 			reader.readAsDataURL(input.files[0]);
 		}
 	})
+
+	//Upload ảnh lên server
+	$scope.upload_image = function() {
+		// Nếu thành công, gọi resolve() hoặc reject() nếu có lỗi
+		return new Promise((resolve, reject) => {
+			//Kiểm tra xem thử có chọn hình không (Không tính hình hiển thị sẵn)
+			if ($scope.temp_image_data && $scope.file) {
+				//Tạo ra param có tên là "file" và dữ liệu là $scope.file
+				var formData = new FormData()
+				formData.append("file", $scope.file)
+				//Gửi file lên server qua post
+				var url = `${host}/file/SanPham`
+				$http.post(url, formData, {
+					transformRequest: angular.identity, // Tắt tuần tự hóa mặc định
+					headers: { 'Content-Type': undefined } // Để trình duyệt tự đặt Content-Type
+				}).then(resp => {
+					$scope.form.hinhAnh = $scope.file.name; // Tên file bao gồm cả đuôi, ví dụ: "example.png
+					console.log("Success upload file name: ", $scope.form.hinhAnh)
+					resolve() //gọi resolve khi upload thành công
+				}).catch(error => {
+					console.error("Error upload file", error)
+					reject() //gọi reject khi có lỗi
+				})
+			}
+		})
+
+	}
+
+	//Thêm sản phẩm mới
+	$scope.create = function() {
+		// Chờ $scope.upload_image() hoàn tất trước khi thực hiện POST
+		$scope.upload_image().then(() => {
+			var url = `${host}/SanPham`
+			$http.post(url, $scope.form).then(resp => {
+				$scope.update = true
+				$scope.load_all()
+				swal("Thành công !", "Bạn đã thêm sản phẩm thành công", "success")
+			}).catch(error => {
+				console.log("Error create SanPham", error)
+			})
+		}).catch(error => {
+			console.log(error)
+		})
+	}
+
+	//Xóa sản phẩm theo id
+	$scope.delete = function(maSp) {
+		swal({
+			title: "Bạn có chắc chắn không ?",
+			text: "Khi đã xóa thì bạn không thể khôi phục lại được",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		}).then((willDelete) => {
+			if (willDelete) {
+				var url = `${host}/SanPham/${maSp}`
+				$http.delete(url).then(resp => {
+					$scope.load_all()
+					swal("Xóa thành công", {
+						icon: "success",
+					});
+				}).catch(error => {
+					console.log("Error delete SanPham", error)
+				})
+			} else {
+				swal("Không thực hiện thao tác xóa")
+			}
+		})
+
+
+
+	}
 
 	//Tự động chạy khi mở tab
 	$scope.load_all()

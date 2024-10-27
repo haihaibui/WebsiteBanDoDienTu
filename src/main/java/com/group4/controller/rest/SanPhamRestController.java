@@ -7,8 +7,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,6 +48,25 @@ public class SanPhamRestController {
 	public ResponseEntity<Integer> restGetSoLuongSp(){
 		int soLuong = (int)spDao.count();
 		return ResponseEntity.ok(soLuong);
+	}
+	
+	@PostMapping()
+	public ResponseEntity<SanPham> restPostSanPham(@RequestBody SanPham sp){
+		if(spDao.existsById(sp.getMaSanPham())){
+			return ResponseEntity.badRequest().build();
+		}
+		spDao.save(sp);
+		return ResponseEntity.ok(sp);
+	}
+	
+	@DeleteMapping("{id}")
+	public ResponseEntity<Void> restDeleteSanPham(@PathVariable("id") String id){
+		Optional<SanPham> sp = spDao.findById(id);
+		if(sp.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+		spDao.deleteById(id);
+		return ResponseEntity.ok().build();
 	}
 	
 }
