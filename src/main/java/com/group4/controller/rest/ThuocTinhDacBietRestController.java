@@ -7,8 +7,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,6 +43,33 @@ public class ThuocTinhDacBietRestController {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(ttdb.get());
+	}
+	
+	@PostMapping()
+	public ResponseEntity<ThuocTinhDacBiet> restPostTtdb(@RequestBody ThuocTinhDacBiet ttdb){
+		if(ttdbDao.existsById(ttdb.getMaThuocTinhDacBiet())) {
+			return ResponseEntity.badRequest().build();
+		}
+		ttdbDao.save(ttdb);
+		return ResponseEntity.ok(ttdb);
+	}
+	
+	@PutMapping("{id}")
+	public ResponseEntity<ThuocTinhDacBiet> restPutTtdb(@RequestBody ThuocTinhDacBiet ttdb, @PathVariable("id") String id){
+		if(!ttdbDao.existsById(id)) {
+			return ResponseEntity.notFound().build();
+		}
+		ttdbDao.save(ttdb);
+		return ResponseEntity.ok(ttdb);
+	}
+	
+	@DeleteMapping("{id}")
+	public ResponseEntity<Void> restDeleteTtdb(@PathVariable("id") String id){
+		if(!ttdbDao.existsById(id)) {
+			return ResponseEntity.notFound().build();
+		}
+		ttdbDao.deleteById(id);
+		return ResponseEntity.ok().build();
 	}
 	
 }

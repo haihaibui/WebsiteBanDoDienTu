@@ -32,6 +32,51 @@ app.controller('QuanLyThuocTinhDacBietCtrl',function($http, $scope){
 		})
 	}
 	
+	//Thêm thuộc tính đặc biệt
+	$scope.create = function(){
+		var url = `${host}/ThuocTinhDacBiet`
+		$http.post(url,$scope.form).then(resp => {
+			$scope.update = true
+			$scope.load_all()
+			swal("Thành công !","Bạn đã thêm thành công thuộc tính đặc biệt", "success")
+		}).catch(error => {
+			console.log("Error create TTDB", error)
+		})
+	}
+	
+	//Cập nhật thuộc tính đặc biệt
+	$scope.update_TTDB = function(maTTDB){
+		var url = `${host}/ThuocTinhDacBiet/${maTTDB}`
+		$http.put(url,$scope.form).then(resp => {
+			$scope.load_all()
+			swal("Thành công !","Bạn đã cập nhật thành công thuộc tính đặc biệt","success")
+		}).catch(error => {
+			console.log("Error update TTDB",error)
+		})
+	}
+	
+	//Xóa thuộc tính đặc biệt
+	$scope.delete = function(maTTDB){
+		swal({
+			title: "Bạn chắc chắn không ?",
+			text: "Khi đã xóa thì bạn không thể khôi phục lại được",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		}).then((willDelete) => {
+			if(willDelete){
+				var url = `${host}/ThuocTinhDacBiet/${maTTDB}`
+				$http.delete(url).then(resp => {
+					$scope.load_all()
+					swal("Xóa thành công",{icon: "success"})
+				}).catch(error => {
+					console.log("Error delete TTDB",error)
+				})
+			}else{
+				swal("Không thực hiện thao tác xóa")
+			}
+		})
+	}
 	
 	//Tự động chạy đầu tiên khi chọn tab
 	$scope.load_all()
