@@ -49,5 +49,15 @@ public class FileManagerServiceImp implements FileManagerService{
 			throw new RuntimeException(e);
 		}
 	}
+
+	@Override
+	public void delete(String folder, String name) {
+		try {
+			Path path = this.getPath(folder, name);
+			path.toFile().delete();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 	
 }

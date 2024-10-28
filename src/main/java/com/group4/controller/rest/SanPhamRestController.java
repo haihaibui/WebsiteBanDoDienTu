@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,6 +55,16 @@ public class SanPhamRestController {
 	public ResponseEntity<SanPham> restPostSanPham(@RequestBody SanPham sp){
 		if(spDao.existsById(sp.getMaSanPham())){
 			return ResponseEntity.badRequest().build();
+		}
+		spDao.save(sp);
+		return ResponseEntity.ok(sp);
+	}
+	
+	@PutMapping("{id}")
+	public ResponseEntity<SanPham> restPutSanPham(@RequestBody SanPham sp, @PathVariable("id") String id){
+		Optional<SanPham> sanPham = spDao.findById(id);
+		if(sanPham.isEmpty()) {
+			return ResponseEntity.notFound().build();
 		}
 		spDao.save(sp);
 		return ResponseEntity.ok(sp);

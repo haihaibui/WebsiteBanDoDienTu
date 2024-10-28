@@ -7,8 +7,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface FileManagerService {
 
-	public byte[] read(String path,String name);
+	public byte[] read(String folder,String name);
 	
-	public void save(String path, MultipartFile file);
+	public void save(String folder, MultipartFile file);
+	
+	public void delete(String folder, String name);
 	
 }

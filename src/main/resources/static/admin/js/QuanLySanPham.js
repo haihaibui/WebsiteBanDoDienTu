@@ -146,8 +146,18 @@ app.controller('QuanLySanPhamCtrl', function($http, $scope) {
 		})
 	}
 
+	//Hàm xóa ảnh
+	$scope.delete_img = function(img_name) {
+		var url = `${host}/file/SanPham/${img_name}`
+		$http.delete(url).then(resp => {
+			console.log("Success delete Image: ",img_name)
+		}).catch(error => {
+			console.log("Error delete Image", error)
+		})
+	}
+
 	//Xóa sản phẩm theo id
-	$scope.delete = function(maSp) {
+	$scope.delete = function(maSp, img_name) {
 		swal({
 			title: "Bạn có chắc chắn không ?",
 			text: "Khi đã xóa thì bạn không thể khôi phục lại được",
@@ -158,6 +168,9 @@ app.controller('QuanLySanPhamCtrl', function($http, $scope) {
 			if (willDelete) {
 				var url = `${host}/SanPham/${maSp}`
 				$http.delete(url).then(resp => {
+					if(img_name){
+						$scope.delete_img(img_name)
+					}
 					$scope.load_all()
 					swal("Xóa thành công", {
 						icon: "success",
@@ -169,11 +182,28 @@ app.controller('QuanLySanPhamCtrl', function($http, $scope) {
 				swal("Không thực hiện thao tác xóa")
 			}
 		})
-
-
-
 	}
-
+	
+	
+	//Cập nhật sản phẩm
+	$scope.update_san_pham = function(maSp, old_image){
+		$scope.upload_image().then(() => {
+			var url = `${host}/SanPham/${maSp}`
+			$http.put(url,$scope.form).then(resp => {
+				if(old_image && old_image!=resp.data.hinhAnh){
+					$scope.delete_img(old_image)
+				}
+				$scope.load_all()
+				swal("Thành công !","Cập nhật sản phẩm thành công","success")
+			}).catch(error => {
+				console.log("Error update SanPham", error)
+			})
+		}).catch(error => {
+			console.log("Error upload image",error)
+		})
+	}
+	
+	
 	//Tự động chạy khi mở tab
 	$scope.load_all()
 	$scope.load_list_cl()
