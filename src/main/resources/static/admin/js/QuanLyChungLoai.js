@@ -83,16 +83,14 @@ app.controller('QuanLyChungloaiCtrl', function($http, $scope) {
 					$http.delete(url).then(resp => {
 						$scope.load_all()
 						console.log("Success delete ChungLoai")
-						swal("Xóa thành công", {
-							icon: "success",
-						});
+						swal("Xóa thành công", {icon: "success",})
 					}).catch(error => {
 						console.log("Error delete ChungLoai", error)
 					})
 				} else {
-					swal("Không thực hiện thao tác xóa");
+					swal("Không thực hiện thao tác xóa")
 				}
-			});
+			})
 	}
 
 	//Tự động chạy đầu tiên khi mở tab Quản lý chủng loại
