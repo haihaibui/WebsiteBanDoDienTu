@@ -88,7 +88,7 @@ app.controller('QuanLySanPhamCtrl', function($http, $scope) {
 		if (input.files && input.files[0]) {
 			$scope.file = input.files[0];
 			var fileName = $scope.file.name; // Tên file bao gồm cả đuôi, ví dụ: "example.png"
-			console.log("File name:", fileName);
+			console.log("File name choose:", fileName);
 			// Đọc file để hiển thị ảnh base64
 			var reader = new FileReader()
 			reader.onload = function(e) {
@@ -116,12 +116,14 @@ app.controller('QuanLySanPhamCtrl', function($http, $scope) {
 					headers: { 'Content-Type': undefined } // Để trình duyệt tự đặt Content-Type
 				}).then(resp => {
 					$scope.form.hinhAnh = $scope.file.name; // Tên file bao gồm cả đuôi, ví dụ: "example.png
-					console.log("Success upload file name: ", $scope.form.hinhAnh)
+					console.log("Success upload file")
 					resolve() //gọi resolve khi upload thành công
 				}).catch(error => {
 					console.error("Error upload file", error)
 					reject() //gọi reject khi có lỗi
 				})
+			} else {
+				resolve()
 			}
 		})
 

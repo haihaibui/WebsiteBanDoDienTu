@@ -28,29 +28,21 @@ public class FileManagerRestController {
 	@Autowired
 	FileManagerService fileService;
 	
-	@GetMapping("/SanPham/{name}")
-	public ResponseEntity<byte[]> download(@PathVariable("name") String name){
-		byte[] file = fileService.read("/static/image/SanPham", name);
-		if(file==null) {
-			ResponseEntity.notFound().build();
-		}
-		return ResponseEntity.ok(file);
-	}
-
-	
-	@GetMapping("/NguoiDung/{name}")
-	public ResponseEntity<byte[]> downloadNd(@PathVariable("name") String name){
-		byte[] file = fileService.read("/static/image/NguoiDung", name);
-		if(file==null) {
-			ResponseEntity.notFound().build();
-		}
-		return ResponseEntity.ok(file);
-	}
-	
-	@PostMapping("/SanPham")
-	public ResponseEntity<Void> saveFileSp(@RequestParam("file") MultipartFile file){
+	@GetMapping("/{folder}/{name}")
+	public ResponseEntity<byte[]> download(@PathVariable("name") String name, @PathVariable("folder") String folder){
 		try {
-			fileService.save("/static/image/SanPham", file);
+			byte[] img = fileService.read(folder, name);
+			return ResponseEntity.ok(img);
+		} catch (RuntimeException e) {
+			return ResponseEntity.badRequest().build();
+		}
+	}
+		
+	
+	@PostMapping("/{folder}")
+	public ResponseEntity<Void> saveFileSp(@PathVariable("folder") String folder,@RequestParam("file") MultipartFile file){
+		try {
+			fileService.save(folder, file);
 			return ResponseEntity.ok().build();
 		} catch (RuntimeException e) {
 			return ResponseEntity.badRequest().build();

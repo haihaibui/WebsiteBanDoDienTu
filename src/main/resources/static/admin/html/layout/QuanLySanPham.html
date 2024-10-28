@@ -27,7 +27,7 @@
 			</thead>
 			<tbody class="fw-light fs-5">
 				<tr ng-repeat="sp in items">
-					<td><img class="img-fluid" style="height: 70px" ng-src="/api/file/SanPham/{{sp.hinhAnh}}"></td>
+					<td><img class="img-fluid" style="height: 70px" ng-src="{{sp.hinhAnh?'/api/file/SanPham/'+sp.hinhAnh:default_image_src}}"></td>
 					<td class="pt-4">{{sp.maSanPham}}</td>
 					<td class="pt-4">{{sp.tenSanPham}}</td>
 					<td class="pt-4">{{sp.giaTien}}</td>
