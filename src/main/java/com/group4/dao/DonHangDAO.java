@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import com.group4.dto.DoanhThuTheoChungLoaiDTO;
+import com.group4.dto.DoanhThuTheoNhaCungCap;
 import com.group4.dto.DoanhThuTheoThangDTO;
 import com.group4.entity.DonHang;
 
@@ -21,5 +23,20 @@ public interface DonHangDAO extends JpaRepository<DonHang, Integer>{
 			+ "GROUP BY YEAR(dh.ngayLapDon), MONTH(dh.ngayLapDon) "
 			+ "ORDER BY YEAR(dh.ngayLapDon), MONTH(dh.ngayLapDon) ")
 	List<DoanhThuTheoThangDTO> getDoanhThuTheoThang();
+	
+	//Thống kê doanh thu theo chủng loại
+	@Query("SELECT new com.group4.dto.DoanhThuTheoChungLoaiDTO(sp.chungLoai.tenChungLoai, SUM(dhct.soLuong*dhct.giaTien)) "
+			+ "FROM DonHangChiTiet dhct "
+			+ "JOIN SanPham sp ON dhct.sanPham.maSanPham = sp.maSanPham "
+			//+ "JOIN ChungLoai cl ON cl.maChungLoai = sp.maCl"
+			+ "GROUP BY sp.chungLoai.tenChungLoai "
+			+ "ORDER BY SUM(dhct.soLuong*dhct.giaTien) DESC ")
+	List<DoanhThuTheoChungLoaiDTO> getDoanhThuTheoChungLoai();
+	
+	//Thống kê doanh thu theo nhà cung cấp
+	@Query("SELECT new com.group4.dto.DoanhThuTheoNhaCungCap(sp.nhaCungCap.tenNhaCungCap, sum(dhct.giaTien*dhct.soLuong))"
+			+ " FROM DonHangChiTiet dhct JOIN dhct.sanPham sp"
+			+ " GROUP BY sp.nhaCungCap.tenNhaCungCap")
+	List<DoanhThuTheoNhaCungCap> getDoanhThuTheoNhaCungCap();
 	
 }

@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.group4.dao.DonHangDAO;
+import com.group4.dto.DoanhThuTheoChungLoaiDTO;
+import com.group4.dto.DoanhThuTheoNhaCungCap;
 import com.group4.dto.DoanhThuTheoThangDTO;
+import com.group4.service.DonHangService;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -20,15 +23,33 @@ import com.group4.dto.DoanhThuTheoThangDTO;
 public class ThongKeRestController {
 	
 	@Autowired
-	DonHangDAO dhDao;
+	DonHangService dhService;
 	
-	@GetMapping("DoanhThu")
+	@GetMapping("/DoanhThu/TheoThang")
 	public ResponseEntity<Collection<DoanhThuTheoThangDTO>> restGetDoanhThuTheoThang(){
-		List<DoanhThuTheoThangDTO> listDttt = dhDao.getDoanhThuTheoThang();
+		List<DoanhThuTheoThangDTO> listDttt = dhService.getTkDoanhThuTheoThang();
 		if(listDttt.isEmpty()) {
 			return ResponseEntity.noContent().build();
 		}
 		return ResponseEntity.ok(listDttt);
+	}
+	
+	@GetMapping("/DoanhThu/TheoChungLoai")
+	public ResponseEntity<Collection<DoanhThuTheoChungLoaiDTO>> restGetDoanhThuTheoCl(){
+		List<DoanhThuTheoChungLoaiDTO> listDttcl =dhService.getTkDoanhThuTheoCl();
+		if(listDttcl.isEmpty()) {
+			return ResponseEntity.noContent().build();
+		}
+		return ResponseEntity.ok(listDttcl);
+	}
+	
+	@GetMapping("/DoanhThu/TheoNhaCungCap")
+	public ResponseEntity<Collection<DoanhThuTheoNhaCungCap>> restGetDoanhThuTheoNcc(){
+		List<DoanhThuTheoNhaCungCap> listDttncc = dhService.getTkDoanhThuTheoNcc();
+		if(listDttncc.isEmpty()) {
+			return ResponseEntity.noContent().build();
+		}
+		return ResponseEntity.ok(listDttncc);
 	}
 	
 }
