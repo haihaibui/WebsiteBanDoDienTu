@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.group4.dao.DonHangDAO;
+import com.group4.dao.NguoiDungDAO;
 import com.group4.dto.DoanhThuTheoChungLoaiDTO;
 import com.group4.dto.DoanhThuTheoNhaCungCap;
 import com.group4.dto.DoanhThuTheoThangDTO;
+import com.group4.dto.SoLuongKhachDangKyTheoThangDTO;
 import com.group4.service.DonHangService;
+import com.group4.service.NguoiDungService;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -24,6 +27,9 @@ public class ThongKeRestController {
 	
 	@Autowired
 	DonHangService dhService;
+	
+	@Autowired
+	NguoiDungService ndService;
 	
 	@GetMapping("/DoanhThu/TheoThang")
 	public ResponseEntity<Collection<DoanhThuTheoThangDTO>> restGetDoanhThuTheoThang(){
@@ -50,6 +56,15 @@ public class ThongKeRestController {
 			return ResponseEntity.noContent().build();
 		}
 		return ResponseEntity.ok(listDttncc);
+	}
+	
+	@GetMapping("/KhachHang/SoLuongDangKyTheoThang")
+	public ResponseEntity<Collection<SoLuongKhachDangKyTheoThangDTO>> restGetSoLuongKhachDangKyTheoThang(){
+		List<SoLuongKhachDangKyTheoThangDTO> listTknd = ndService.getTkSoLuongKhachDangKyTheoThang();
+		if(listTknd.isEmpty()) {
+			return ResponseEntity.noContent().build();
+		}
+		return ResponseEntity.ok(listTknd);
 	}
 	
 }

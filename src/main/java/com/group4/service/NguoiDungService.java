@@ -1,5 +1,11 @@
 package com.group4.service;
 
-public interface NguoiDungService {
+import java.util.List;
 
+import com.group4.dto.SoLuongKhachDangKyTheoThangDTO;
+
+public interface NguoiDungService {
+	
+	public List<SoLuongKhachDangKyTheoThangDTO> getTkSoLuongKhachDangKyTheoThang();
+	
 }
