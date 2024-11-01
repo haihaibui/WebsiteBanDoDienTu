@@ -74,8 +74,10 @@ app.controller('thongKeCtrl', function($http, $scope) {
 	$scope.generateRandomColors = function(numColors) {
 		let colors = [];
 		for (let i = 0; i < numColors; i++) {
-			const color = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+			// Các giá trị RGB dưới 128 để tạo màu tối
+			const color = `rgb(${Math.floor(Math.random() * 128)}, ${Math.floor(Math.random() * 128)}, ${Math.floor(Math.random() * 128)})`;
 			colors.push(color);
+			//const color = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
 		}
 		return colors;
 	}
@@ -137,6 +139,36 @@ app.controller('thongKeCtrl', function($http, $scope) {
 			})
 		}).catch(error => {
 			console.log("Error get ThongKeDoanhThuTheoNcc", error)
+		})
+	}
+	
+	//Thống kê số lượng khách đăng ký theo tháng 
+	$scope.amount_customer_register_by_month_statistics = function(){
+		var url = `${host}/ThongKe/KhachHang/SoLuongDangKyTheoThang`
+		$http.get(url).then(resp => {
+			$scope.present_chart.destroy()
+			var labels = resp.data.map(item => item.thang+"/"+item.nam )
+			var data = resp.data.map(item => item.soLuong)
+			//Khởi tạo biểu đồ
+			var ctx = document.getElementById("bieuDoDoanhThuSoLuongKhachDangKyTheoThang").getContext("2d")
+			$scope.present_chart = new Chart(ctx, {
+				type: "bar",
+				data:{
+					labels: labels,
+					datasets:[{
+						label: "Số lượng khách đăng ký theo tháng",
+						data:data,
+						backgroundColor: 'rgba(75, 192, 192, 0.6)',
+						borderColor: 'rgba(75, 192, 192, 1)',
+						borderWidth: 2
+					}]
+				},
+				options: {
+					indexAxis: 'y'
+				}
+			})
+		}).catch(error => {
+			console.log("Error create chart customer", error)
 		})
 	}
 

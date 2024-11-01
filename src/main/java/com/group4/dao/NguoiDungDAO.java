@@ -17,6 +17,7 @@ public interface NguoiDungDAO extends JpaRepository<NguoiDung, String>{
 	//Thống kê số lượng người dùng đăng ký theo tháng
 	@Query("SELECT new com.group4.dto.SoLuongKhachDangKyTheoThangDTO(MONTH(nd.ngayDangKy), YEAR(nd.ngayDangKy), COUNT(nd.maNguoiDung))"
 			+ " FROM NguoiDung nd"
+			+ " WHERE nd.vaiTro LIKE 'Khách hàng' "
 			+ " GROUP BY YEAR(nd.ngayDangKy), MONTH(nd.ngayDangKy)")
 	List<SoLuongKhachDangKyTheoThangDTO> getThongKeKhachDangKyTheoThang();
 	
