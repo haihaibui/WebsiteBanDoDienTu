@@ -8,4 +8,6 @@ public interface SanPhamService {
 	public List<SanPham> findSpAll();
 	
 	public SanPham findSpById(String id);
+	
+	public List<SanPham> filterSanPham(String tenSanPham);
 }

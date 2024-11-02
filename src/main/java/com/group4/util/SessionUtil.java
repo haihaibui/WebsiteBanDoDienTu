@@ -1,11 +1,11 @@
 package com.group4.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import jakarta.servlet.http.HttpSession;
 
-@Service
+@Component
 public class SessionUtil {
 	
 	@Autowired

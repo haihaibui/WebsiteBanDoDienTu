@@ -203,6 +203,19 @@ app.controller('QuanLySanPhamCtrl', function($http, $scope) {
 		})
 	}
 	
+	//Lọc sản phẩm
+	$scope.filter = function(){
+		var params = { params: $scope.form_filter }; // Đặt form_filter vào tham số `params` cho GET request
+		url = `${host}/SanPham/filter`
+		$http.get(url,params).then(resp => {
+			$scope.items = resp.data
+			document.getElementById("btnCloseFilter").click()
+			console.log(resp.data)
+			swal("Thành công !","Lọc sản phẩm thành công !","success")
+		}).catch(error => {
+			console.log("Error fillter SanPham",error)
+		})
+	}
 	
 	//Tự động chạy khi mở tab
 	$scope.load_all()

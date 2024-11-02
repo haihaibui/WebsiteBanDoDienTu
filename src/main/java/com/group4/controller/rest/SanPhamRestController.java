@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.group4.dao.SanPhamDAO;
 import com.group4.entity.SanPham;
+import com.group4.service.SanPhamService;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -27,6 +29,9 @@ public class SanPhamRestController {
 	@Autowired
 	SanPhamDAO spDao;
 	
+	@Autowired
+	SanPhamService spService;
+		
 	@GetMapping()
 	public ResponseEntity<Collection<SanPham>> restGetAllSp(){
 		List<SanPham> listSp = spDao.findAll();
@@ -49,6 +54,12 @@ public class SanPhamRestController {
 	public ResponseEntity<Integer> restGetSoLuongSp(){
 		int soLuong = (int)spDao.count();
 		return ResponseEntity.ok(soLuong);
+	}
+	
+	@GetMapping("filter")
+	public ResponseEntity<Collection<SanPham>> restFilterSp(@RequestParam(required = false) String tenSanPham){
+		List<SanPham> listSp = spService.filterSanPham(tenSanPham);
+		return ResponseEntity.ok(listSp);
 	}
 	
 	@PostMapping()
