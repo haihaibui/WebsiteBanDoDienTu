@@ -57,8 +57,10 @@ public class SanPhamRestController {
 	}
 	
 	@GetMapping("filter")
-	public ResponseEntity<Collection<SanPham>> restFilterSp(@RequestParam(required = false) String tenSanPham){
-		List<SanPham> listSp = spService.filterSanPham(tenSanPham);
+	public ResponseEntity<Collection<SanPham>> restFilterSp(
+			@RequestParam(required = false) String tenSanPham, 
+			@RequestParam(required = false) String maCl){
+		List<SanPham> listSp = spService.filterSanPham(tenSanPham,maCl);
 		return ResponseEntity.ok(listSp);
 	}
 	

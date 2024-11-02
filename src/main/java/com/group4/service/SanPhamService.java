@@ -9,5 +9,5 @@ public interface SanPhamService {
 	
 	public SanPham findSpById(String id);
 	
-	public List<SanPham> filterSanPham(String tenSanPham);
+	public List<SanPham> filterSanPham(String tenSanPham, String maCl);
 }

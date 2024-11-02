@@ -210,7 +210,6 @@ app.controller('QuanLySanPhamCtrl', function($http, $scope) {
 		$http.get(url,params).then(resp => {
 			$scope.items = resp.data
 			document.getElementById("btnCloseFilter").click()
-			console.log(resp.data)
 			swal("Thành công !","Lọc sản phẩm thành công !","success")
 		}).catch(error => {
 			console.log("Error fillter SanPham",error)

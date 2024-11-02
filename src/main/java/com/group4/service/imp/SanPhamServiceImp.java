@@ -31,9 +31,10 @@ public class SanPhamServiceImp implements SanPhamService{
 	}
 
 	@Override
-	public List<SanPham> filterSanPham(String tenSanPham) {
+	public List<SanPham> filterSanPham(String tenSanPham, String maCl) {
 		Specification<SanPham> spec = Specification.where(null);  //Bắt đầu với điều kiện null 
 		spec = spec.and(spSpec.hasTenSanPham(tenSanPham));
+		spec = spec.and(spSpec.hasChungLoai(maCl));
 		return spDao.findAll(spec);
 	}
 
