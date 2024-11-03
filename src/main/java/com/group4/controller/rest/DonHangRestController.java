@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.group4.dao.DonHangDAO;
 import com.group4.entity.DonHang;
+import com.group4.service.DonHangService;
+import com.group4.service.MailerService;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -24,11 +26,14 @@ import com.group4.entity.DonHang;
 public class DonHangRestController {
 	
 	@Autowired
-	DonHangDAO dhDao;
+	DonHangService dhService;
+	
+	@Autowired
+	MailerService mailService;
 	
 	@GetMapping()
 	public ResponseEntity<Collection<DonHang>> restGetAllDh(){
-		List<DonHang> listDh = dhDao.findAll();
+		List<DonHang> listDh = dhService.findAll();
 		if(listDh.isEmpty()) {
 			return ResponseEntity.noContent().build();
 		}
@@ -37,13 +42,13 @@ public class DonHangRestController {
 	
 	@GetMapping("SoLuong")
 	public ResponseEntity<Integer> restGetSoLuongDh(){
-		int soLuong = (int) dhDao.count();
+		int soLuong = dhService.count();
 		return ResponseEntity.ok(soLuong);
 	}
 	
 	@GetMapping("{id}")
 	public ResponseEntity<DonHang> restGetDhById(@PathVariable("id") Integer id){
-		Optional<DonHang> dh = dhDao.findById(id);
+		Optional<DonHang> dh =dhService.findById(id);
 		if(dh.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
@@ -52,7 +57,7 @@ public class DonHangRestController {
 	
 	@GetMapping("/TrangThai/{x}")
 	public ResponseEntity<Collection<DonHang>> restGetDhByTrangThai(@PathVariable("x") String x){
-		List<DonHang> listDh = dhDao.findAllByTrangThaiLike(x);
+		List<DonHang> listDh = dhService.findAllByTrangThai(x);
 		if(listDh.isEmpty()) {
 			return ResponseEntity.noContent().build();
 		}
@@ -61,19 +66,25 @@ public class DonHangRestController {
 	
 	@PutMapping("{id}")
 	public ResponseEntity<DonHang> restPutDh(@PathVariable("id") Integer id, @RequestBody DonHang dh){
-		if(!dhDao.existsById(id)) {
+		if(!dhService.existsById(id)) {
 			return ResponseEntity.notFound().build();
 		}
-		dhDao.save(dh);
+		dhService.save(dh);
+		//Gửi mail
+		String body = "Kính chào khách hàng "+dh.getNguoiDung().getHoTen()+".\n\n"
+						+ "Quý khách có 1 đơn hàng có mã "+dh.getMaDonHang()+", địa chỉ nhận hàng là "+dh.getDiaChiGiao()+".\n\n"
+						+ "Hiện đơn hàng đang trong trạng thái "+dh.getTrangThai()+".\n\n"
+						+ "Cảm ơn quý khách đã tin tưởng cửa hàng điện máy HTV.\n";
+		mailService.push(dh.getNguoiDung().getEmail(),"Cập nhật trạng thái đơn hàng",body);
 		return ResponseEntity.ok(dh);
 	}
 	
 	@DeleteMapping("{id}")
 	public ResponseEntity<Void> restDeleteDh(@PathVariable("id") Integer id){
-		if(!dhDao.existsById(id)) {
+		if(!dhService.existsById(id)) {
 			return ResponseEntity.notFound().build();
 		}
-		dhDao.deleteById(id);
+		dhService.deleteById(id);
 		return ResponseEntity.ok().build();
 	}
 	
