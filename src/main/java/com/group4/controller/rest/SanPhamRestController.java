@@ -27,14 +27,11 @@ import com.group4.service.SanPhamService;
 public class SanPhamRestController {
 
 	@Autowired
-	SanPhamDAO spDao;
-	
-	@Autowired
 	SanPhamService spService;
 		
 	@GetMapping()
 	public ResponseEntity<Collection<SanPham>> restGetAllSp(){
-		List<SanPham> listSp = spDao.findAll();
+		List<SanPham> listSp = spService.findAll();
 		if(listSp.isEmpty()) {
 			return ResponseEntity.noContent().build();
 		}
@@ -43,7 +40,7 @@ public class SanPhamRestController {
 	
 	@GetMapping("{id}")
 	public ResponseEntity<SanPham> restGetSpById(@PathVariable("id") String id){
-		Optional<SanPham> sp = spDao.findById(id);
+		Optional<SanPham> sp = spService.findById(id);
 		if(sp.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
@@ -52,7 +49,7 @@ public class SanPhamRestController {
 	
 	@GetMapping("SoLuong")
 	public ResponseEntity<Integer> restGetSoLuongSp(){
-		int soLuong = (int)spDao.count();
+		int soLuong = (int)spService.count();
 		return ResponseEntity.ok(soLuong);
 	}
 	
@@ -66,30 +63,30 @@ public class SanPhamRestController {
 	
 	@PostMapping()
 	public ResponseEntity<SanPham> restPostSanPham(@RequestBody SanPham sp){
-		if(spDao.existsById(sp.getMaSanPham())){
+		if(spService.existsById(sp.getMaSanPham())){
 			return ResponseEntity.badRequest().build();
 		}
-		spDao.save(sp);
+		spService.save(sp);
 		return ResponseEntity.ok(sp);
 	}
 	
 	@PutMapping("{id}")
 	public ResponseEntity<SanPham> restPutSanPham(@RequestBody SanPham sp, @PathVariable("id") String id){
-		Optional<SanPham> sanPham = spDao.findById(id);
+		Optional<SanPham> sanPham = spService.findById(id);
 		if(sanPham.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
-		spDao.save(sp);
+		spService.save(sp);
 		return ResponseEntity.ok(sp);
 	}
 	
 	@DeleteMapping("{id}")
 	public ResponseEntity<Void> restDeleteSanPham(@PathVariable("id") String id){
-		Optional<SanPham> sp = spDao.findById(id);
+		Optional<SanPham> sp = spService.findById(id);
 		if(sp.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
-		spDao.deleteById(id);
+		spService.deleteById(id);
 		return ResponseEntity.ok().build();
 	}
 	

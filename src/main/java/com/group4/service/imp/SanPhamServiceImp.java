@@ -1,6 +1,7 @@
 package com.group4.service.imp;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
@@ -21,13 +22,23 @@ public class SanPhamServiceImp implements SanPhamService{
 	SanPhamSpecification spSpec;
 	
 	@Override
-	public List<SanPham> findSpAll() {
+	public List<SanPham> findAll() {
 		return spDao.findAll();
 	}
 
 	@Override
-	public SanPham findSpById(String id) {
-		return spDao.findById(id).get();
+	public Optional<SanPham> findById(String id) {
+		return spDao.findById(id);
+	}
+	
+	@Override
+	public SanPham save(SanPham sp) {
+		return spDao.save(sp);
+	}
+
+	@Override
+	public void deleteById(String id) {
+		spDao.deleteById(id);
 	}
 
 	@Override
@@ -36,6 +47,16 @@ public class SanPhamServiceImp implements SanPhamService{
 		spec = spec.and(spSpec.hasTenSanPham(tenSanPham));
 		spec = spec.and(spSpec.hasChungLoai(maCl));
 		return spDao.findAll(spec);
+	}
+
+	@Override
+	public boolean existsById(String id) {
+		return spDao.existsById(id);
+	}
+
+	@Override
+	public int count() {
+		return (int)spDao.count();
 	}
 
 }

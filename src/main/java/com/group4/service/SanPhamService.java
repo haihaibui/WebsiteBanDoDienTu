@@ -1,13 +1,22 @@
 package com.group4.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.group4.entity.SanPham;
 
 public interface SanPhamService {
-	public List<SanPham> findSpAll();
+	public List<SanPham> findAll();
 	
-	public SanPham findSpById(String id);
+	public Optional<SanPham> findById(String id);
+	
+	public SanPham save(SanPham sp);
+	
+	public boolean existsById(String id);
+	
+	public int count();
+	
+	public void deleteById(String id);
 	
 	public List<SanPham> filterSanPham(String tenSanPham, String maCl);
 }
