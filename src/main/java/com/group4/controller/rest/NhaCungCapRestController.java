@@ -18,18 +18,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.group4.dao.NhaCungCapDAO;
 import com.group4.entity.NhaCungCap;
+import com.group4.service.NhaCungCapService;
 
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/NhaCungCap")
 public class NhaCungCapRestController {
-
+	
 	@Autowired
-	NhaCungCapDAO nccDao;
+	NhaCungCapService nccService;
 	
 	@GetMapping()
 	public ResponseEntity<Collection<NhaCungCap>> restGetAllNcc(){
-		List<NhaCungCap> listNcc = nccDao.findAll();
+		List<NhaCungCap> listNcc = nccService.findAll();
 		if(listNcc.isEmpty()) {
 			return ResponseEntity.noContent().build();
 		}
@@ -38,7 +39,7 @@ public class NhaCungCapRestController {
 	
 	@GetMapping("{id}")
 	public ResponseEntity<NhaCungCap> restGetNccById(@PathVariable("id") String id){
-		Optional<NhaCungCap> ncc = nccDao.findById(id);
+		Optional<NhaCungCap> ncc = nccService.findById(id);
 		if(ncc.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
@@ -47,28 +48,28 @@ public class NhaCungCapRestController {
 	
 	@PostMapping()
 	public ResponseEntity<NhaCungCap> restPostNcc(@RequestBody NhaCungCap ncc){
-		if(nccDao.existsById(ncc.getMaNhaCungCap())) {
+		if(nccService.existsById(ncc.getMaNhaCungCap())) {
 			return ResponseEntity.badRequest().build();
 		}
-		nccDao.save(ncc);
+		nccService.save(ncc);
 		return ResponseEntity.ok(ncc);
 	}
 	
 	@PutMapping("{id}")
 	public ResponseEntity<NhaCungCap> restPutNcc(@RequestBody NhaCungCap ncc, @PathVariable("id") String id){
-		if(!nccDao.existsById(id)) {
+		if(!nccService.existsById(id)) {
 			return ResponseEntity.notFound().build();
 		}
-		nccDao.save(ncc);
+		nccService.save(ncc);
 		return ResponseEntity.ok(ncc);
 	}
 	
 	@DeleteMapping("{id}")
 	public ResponseEntity<Void> restDeleteNcc(@PathVariable("id") String id){
-		if(!nccDao.existsById(id)) {
+		if(!nccService.existsById(id)) {
 			return ResponseEntity.notFound().build();
 		}
-		nccDao.deleteById(id);
+		nccService.deleteById(id);
 		return ResponseEntity.ok().build();
 	}
 	

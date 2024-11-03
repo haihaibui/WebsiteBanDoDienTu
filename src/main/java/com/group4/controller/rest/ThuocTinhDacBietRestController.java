@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.group4.dao.ThuocTinhDacBietDAO;
 import com.group4.entity.ThuocTinhDacBiet;
+import com.group4.service.ThuocTinhDacBietService;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -25,11 +26,11 @@ import com.group4.entity.ThuocTinhDacBiet;
 public class ThuocTinhDacBietRestController {
 
 	@Autowired
-	ThuocTinhDacBietDAO ttdbDao;
+	ThuocTinhDacBietService ttdbService;
 	
 	@GetMapping()
 	public ResponseEntity<Collection<ThuocTinhDacBiet>> restGetAllTtdb(){
-		List<ThuocTinhDacBiet> listTtdb = ttdbDao.findAll();
+		List<ThuocTinhDacBiet> listTtdb = ttdbService.findAll();
 		if(listTtdb.isEmpty()) {
 			return ResponseEntity.noContent().build();
 		}
@@ -38,7 +39,7 @@ public class ThuocTinhDacBietRestController {
 	
 	@GetMapping("{id}")
 	public ResponseEntity<ThuocTinhDacBiet> restGetTtdbById(@PathVariable("id") String id){
-		Optional<ThuocTinhDacBiet> ttdb = ttdbDao.findById(id);
+		Optional<ThuocTinhDacBiet> ttdb = ttdbService.findById(id);
 		if(ttdb.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
@@ -47,28 +48,28 @@ public class ThuocTinhDacBietRestController {
 	
 	@PostMapping()
 	public ResponseEntity<ThuocTinhDacBiet> restPostTtdb(@RequestBody ThuocTinhDacBiet ttdb){
-		if(ttdbDao.existsById(ttdb.getMaThuocTinhDacBiet())) {
+		if(ttdbService.existsById(ttdb.getMaThuocTinhDacBiet())) {
 			return ResponseEntity.badRequest().build();
 		}
-		ttdbDao.save(ttdb);
+		ttdbService.save(ttdb);
 		return ResponseEntity.ok(ttdb);
 	}
 	
 	@PutMapping("{id}")
 	public ResponseEntity<ThuocTinhDacBiet> restPutTtdb(@RequestBody ThuocTinhDacBiet ttdb, @PathVariable("id") String id){
-		if(!ttdbDao.existsById(id)) {
+		if(!ttdbService.existsById(id)) {
 			return ResponseEntity.notFound().build();
 		}
-		ttdbDao.save(ttdb);
+		ttdbService.save(ttdb);
 		return ResponseEntity.ok(ttdb);
 	}
 	
 	@DeleteMapping("{id}")
 	public ResponseEntity<Void> restDeleteTtdb(@PathVariable("id") String id){
-		if(!ttdbDao.existsById(id)) {
+		if(!ttdbService.existsById(id)) {
 			return ResponseEntity.notFound().build();
 		}
-		ttdbDao.deleteById(id);
+		ttdbService.deleteById(id);
 		return ResponseEntity.ok().build();
 	}
 	

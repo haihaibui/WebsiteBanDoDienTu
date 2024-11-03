@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.group4.dao.ChungLoaiDAO;
 import com.group4.entity.ChungLoai;
+import com.group4.service.ChungLoaiService;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -25,11 +26,11 @@ import com.group4.entity.ChungLoai;
 public class ChungLoaiRestController {
 	
 	@Autowired
-	ChungLoaiDAO clDao;
+	ChungLoaiService clService;
 	
 	@GetMapping()
 	public ResponseEntity<Collection<ChungLoai>> restGetAllCl(){
-		List<ChungLoai> listCl = clDao.findAll();
+		List<ChungLoai> listCl = clService.findAll();
 		if(listCl.isEmpty()) {
 			return ResponseEntity.noContent().build();
 		}
@@ -38,7 +39,7 @@ public class ChungLoaiRestController {
 	
 	@GetMapping("{x}")
 	public ResponseEntity<ChungLoai> restGetClById(@PathVariable("x") String id) {
-		Optional<ChungLoai> optional = clDao.findById(id);
+		Optional<ChungLoai> optional = clService.findById(id);
 		if(optional.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
@@ -47,28 +48,28 @@ public class ChungLoaiRestController {
 	
 	@PostMapping()
 	public ResponseEntity<ChungLoai> restPostCl(@RequestBody ChungLoai cl){
-		if(clDao.existsById(cl.getMaChungLoai())) {
+		if(clService.existsById(cl.getMaChungLoai())) {
 			return ResponseEntity.badRequest().build();
 		}
-		clDao.save(cl);
+		clService.save(cl);
 		return ResponseEntity.ok(cl);
 	}
 	
 	@PutMapping("{x}")
 	public ResponseEntity<ChungLoai> restPutCl(@RequestBody ChungLoai cl, @PathVariable("x") String id){
-		if(!clDao.existsById(id)) {
+		if(!clService.existsById(id)) {
 			return ResponseEntity.notFound().build();
 		}
-		clDao.save(cl);
+		clService.save(cl);
 		return ResponseEntity.ok(cl);
 	}
 	
 	@DeleteMapping("{x}")
 	public ResponseEntity<Void> restDeleteCl(@PathVariable("x") String id){
-		if(!clDao.existsById(id)) {
+		if(!clService.existsById(id)) {
 			return ResponseEntity.notFound().build();
 		}
-		clDao.deleteById(id);
+		clService.deleteById(id);
 		return ResponseEntity.ok().build();
 	}
 	
