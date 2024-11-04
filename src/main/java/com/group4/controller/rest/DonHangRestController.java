@@ -71,12 +71,16 @@ public class DonHangRestController {
 		}
 		dhService.save(dh);
 		//Gửi mail
-		String body = "Kính chào khách hàng "+dh.getNguoiDung().getHoTen()+".\n\n"
-						+ "Quý khách có 1 đơn hàng có mã "+dh.getMaDonHang()+", địa chỉ nhận hàng là "+dh.getDiaChiGiao()+".\n\n"
-						+ "Hiện đơn hàng đang trong trạng thái "+dh.getTrangThai()+".\n\n"
-						+ "Cảm ơn quý khách đã tin tưởng cửa hàng điện máy HTV.\n";
+		String body = "<div style='font-size: 13px; color: #000000;' !important>"
+						+ "<p style='color: #000000;' !important>Kính chào khách hàng <strong>"+dh.getNguoiDung().getHoTen()+"</strong>.</p>"
+						+ "<p style='color: #000000;' !important>Quý khách có đơn hàng có mã là <strong>"+dh.getMaDonHang()+"</strong>, địa chỉ nhận hàng là <strong>"+dh.getDiaChiGiao()+"</strong>.</p>"
+						+ "<p style='color: #000000;' !important>Hiện đơn hàng đang trong trạng thái: <strong>"+dh.getTrangThai()+"</strong>.</p>"
+						+ "<p style='color: #000000;' !important>Cảm ơn quý khách đã tin tưởng cửa hàng điện máy HTV.</p>"
+						+ "</div>";
 		mailService.push(dh.getNguoiDung().getEmail(),"Cập nhật trạng thái đơn hàng",body);
 		return ResponseEntity.ok(dh);
+		
+		//dh.getNguoiDung().getEmail()
 	}
 	
 	@DeleteMapping("{id}")

@@ -52,6 +52,9 @@ public class MailerServiceImp implements MailerService{
 			
 			//Thêm mail vào hàng chờ
 			queue.add(message);
+			
+			//Gọi hàm để gửi mail
+			this.run();
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
@@ -59,7 +62,7 @@ public class MailerServiceImp implements MailerService{
 	}
 
 	@Override
-	@Scheduled(fixedDelay = 1000)
+	//@Scheduled(fixedDelay = 1000)
 	public void run() {
 		if (queue.isEmpty()) {
 	        return; // Dừng nếu hàng chờ trống

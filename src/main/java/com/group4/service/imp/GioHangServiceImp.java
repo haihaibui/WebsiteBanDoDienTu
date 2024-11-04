@@ -1,19 +1,14 @@
 package com.group4.service.imp;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.Nhom4.Entity.Product;
-import com.Nhom4.Service.productService;
+//import com.Nhom4.Entity.Product;
+//import com.Nhom4.Service.productService;
 import com.group4.service.GioHangService;
 
 @Service
 public class GioHangServiceImp implements GioHangService{
-	private final Map<Integer, Product> cart = new HashMap<>();
+	/*private final Map<Integer, Product> cart = new HashMap<>();
 
     @Autowired
     private productService productService;
@@ -72,5 +67,5 @@ public class GioHangServiceImp implements GioHangService{
     @Override
     public double getAmount() {
         return cart.values().stream().mapToDouble(product -> product.getDiscountprice() * product.getQty()).sum();
-    }
+    }*/
 }
