@@ -79,8 +79,6 @@ public class DonHangRestController {
 						+ "</div>";
 		mailService.push(dh.getNguoiDung().getEmail(),"Cập nhật trạng thái đơn hàng",body);
 		return ResponseEntity.ok(dh);
-		
-		//dh.getNguoiDung().getEmail()
 	}
 	
 	@DeleteMapping("{id}")
