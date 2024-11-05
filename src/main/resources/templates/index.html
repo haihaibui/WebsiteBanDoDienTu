@@ -4,12 +4,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/shop/css/Header.css}" rel="stylesheet">
+<link th:href="@{/shop/css/Footer.css}" rel="stylesheet">
 </head>
 <body>
 	
-	<div th:replace="~{/layout/test}"></div>
+	<div th:replace="~{/layout/header}"></div>
+	
 	<div th:replace="${content}"></div>
 	
+	<div th:replace="~{/layout/Footer}"></div>
 	
 	<script src="https://kit.fontawesome.com/c6bc02ad3b.js"
 		crossorigin="anonymous"></script>
