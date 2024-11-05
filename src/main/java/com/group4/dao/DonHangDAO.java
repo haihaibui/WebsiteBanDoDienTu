@@ -39,4 +39,7 @@ public interface DonHangDAO extends JpaRepository<DonHang, Integer>{
 			+ " GROUP BY sp.nhaCungCap.tenNhaCungCap")
 	List<DoanhThuTheoNhaCungCap> getDoanhThuTheoNhaCungCap();
 	
+	//Lấy danh sách đơn hàng theo mã người dùng
+	@Query
+	List<DonHang> findByMaNd(String maNd);
 }

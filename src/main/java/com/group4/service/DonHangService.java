@@ -34,4 +34,6 @@ public interface DonHangService {
 	//Thống kê doanh thu theo nhà cung cấp
 	public List<DoanhThuTheoNhaCungCap> getTkDoanhThuTheoNcc();
 	
+	//Lấy đơn hàng theo mã người dùng
+	public List<DonHang> findByMaNd(String maNd);
 }

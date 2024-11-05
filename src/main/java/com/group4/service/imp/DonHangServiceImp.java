@@ -69,5 +69,9 @@ public class DonHangServiceImp implements DonHangService{
 	public List<DoanhThuTheoNhaCungCap> getTkDoanhThuTheoNcc() {
 		return dhDao.getDoanhThuTheoNhaCungCap();
 	}
-
+	
+	@Override
+	public List<DonHang> findByMaNd(String maNd) {
+		return dhDao.findByMaNd(maNd); 
+	}
 }
