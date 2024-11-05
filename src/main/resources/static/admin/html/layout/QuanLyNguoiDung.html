@@ -36,7 +36,7 @@
 					<td class="pt-4">{{nd.soDienThoai}}</td>
 					<td class="ps-3 pt-3">
 						<img alt="" class="img-fluid imgAction me-2" src="/admin/image/editIcon.png" data-bs-toggle="modal" data-bs-target="#modalNguoiDung" ng-click="load_by_id(nd.maNguoiDung)">
-						<img alt="" class="img-fluid imgAction" src="/admin/image/deleteIcon.png">
+						<img alt="" class="img-fluid imgAction" src="/admin/image/deleteIcon.png" ng-click="delete(nd.maNguoiDung)">
 					</td>
 				</tr>
 			</tbody>
@@ -73,13 +73,13 @@
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text text-bg-secondary" id="basic-addon1">Ngày sinh</span>
-                                <input type="text" class="form-control" aria-label="Username" ng-model="form.ngaySinh"
+                                <input type="date" class="form-control" aria-label="Username" ng-model="form.ngaySinh"
                                     aria-describedby="basic-addon1">
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text text-bg-secondary" id="basic-addon1">Ngày đăng ký</span>
-                                <input type="text" class="form-control" aria-label="Username" ng-model="form.ngayDangKy"
-                                    aria-describedby="basic-addon1">
+                                <input type="date" class="form-control" aria-label="Username" ng-model="form.ngayDangKy"
+                                    aria-describedby="basic-addon1" readonly="readonly">
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text text-bg-secondary" id="basic-addon1">Số điện thoại</span>
@@ -158,9 +158,9 @@
                 </div>
                 <div class="modal-footer">
                     <!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
-                    <button type="button" class="btn p-0 m-0 me-3"><img src="/admin/image/resetBtn.png" class="img-fluid" ng-hide="update"
+                    <button type="button" class="btn p-0 m-0 me-3"><img src="/admin/image/resetBtn.png" class="img-fluid" ng-hide="update" ng-click="reset()"
                             style="height: 40px;"></button>
-                    <button type="button" class="btn p-0 m-0"><img src="/admin/image/themBtn.png" class="img-fluid" ng-hide="update"
+                    <button type="button" class="btn p-0 m-0"><img src="/admin/image/themBtn.png" class="img-fluid" ng-hide="update" ng-click="create()"
                             style="height: 44px;"></button>
                      <button type="button" class="btn p-0 m-0"><img src="/admin/image/capNhatBtn.png" class="img-fluid" ng-show="update"
                             style="height: 48px;"></button>
