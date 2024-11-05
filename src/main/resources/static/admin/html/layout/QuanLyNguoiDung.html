@@ -28,8 +28,7 @@
 			<tbody class="fw-light fs-5">
 				<tr ng-repeat = "nd in items">
 					<td>
-						<img class="img-fluid" ng-if="nd.hinhAnh == null" style="height: 70px" src="/api/file/NguoiDung/defaultUser.png">
-						<img class="img-fluid" ng-if="nd.hinhAnh != null" style="height: 70px" ng-src="/api/file/NguoiDung/{{nd.hinhAnh}}">
+						<img class="img-fluid" style="height: 70px" ng-src="{{nd.hinhAnh ? '/api/file/NguoiDung/'+nd.hinhAnh :'/api/file/NguoiDung/defaultUser.png'}}">
 					</td>
 					<td class="pt-4">{{nd.maNguoiDung}}</td>
 					<td class="pt-4">{{nd.hoTen}}</td>
@@ -60,7 +59,7 @@
                             <div class="input-group mb-3">
                                 <span class="input-group-text text-bg-secondary" id="basic-addon1">Mã người dùng</span>
                                 <input type="text" class="form-control" aria-label="Username" ng-model="form.maNguoiDung"
-                                    aria-describedby="basic-addon1">
+                                    aria-describedby="basic-addon1" ng-readonly="update">
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text text-bg-secondary" id="basic-addon1">Mật khẩu</span>
@@ -129,8 +128,8 @@
                                          
                         </div>
                         <div class="col-md-5 px-3 py-5 d-block text-center">
-                            <img src="/api/file/NguoiDung/defaultUser.png" ng-if="form.hinhAnh == null" class="img-fluid" style="height: 287px;cursor: pointer;">
-                            <img ng-src="/api/file/NguoiDung/{{form.hinhAnh}}" ng-if="form.hinhAnh != null" class="img-fluid" style="height: 287px;cursor: pointer;">
+                            <img ng-src="{{temp_image_data || (form.hinhAnh ? '/api/file/NguoiDung/'+form.hinhAnh : '/api/file/NguoiDung/defaultUser.png')}}" class="img-fluid" ng-click="image_click()" style="height: 287px;cursor: pointer;">
+                            <input type="file" id="fileHinh" accept="image/*" style="display: none">
                             <span class="fs-6 fw-light fst-italic">Mẹo: ấn vào hình để chỉnh sửa</span>
                             <div
                                 class="d-flex justify-content-between align-items-center my-3 border border-secondary-subtle rounded pe-2">

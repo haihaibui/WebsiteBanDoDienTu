@@ -8,12 +8,18 @@ import com.group4.entity.NguoiDung;
 
 public interface NguoiDungService {
 	
-	public List<SoLuongKhachDangKyTheoThangDTO> getTkSoLuongKhachDangKyTheoThang();
-	
 	public List<NguoiDung> findAll();
 	
 	public Optional<NguoiDung> findById(String id);
 	
 	public boolean existsById(String id);
+	
+	public NguoiDung save(NguoiDung nd);
+	
+	public void deleteById(String id);
+	
+	public int getSoLuongKhachHang();
+	
+	public List<SoLuongKhachDangKyTheoThangDTO> getTkSoLuongKhachDangKyTheoThang();
 	
 }

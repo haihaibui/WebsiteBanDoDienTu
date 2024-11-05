@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.group4.dao.NguoiDungDAO;
 import com.group4.entity.NguoiDung;
+import com.group4.service.NguoiDungService;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -25,11 +26,11 @@ import com.group4.entity.NguoiDung;
 public class NguoiDungRestController {
 
 	@Autowired
-	NguoiDungDAO ndDao;
+	NguoiDungService ndService;
 	
 	@GetMapping()
 	public ResponseEntity<Collection<NguoiDung>> restGetAllNd(){
-		List<NguoiDung> listNd = ndDao.findAll();
+		List<NguoiDung> listNd = ndService.findAll();
 		if(listNd.isEmpty()) {
 			return ResponseEntity.noContent().build();
 		}
@@ -38,44 +39,45 @@ public class NguoiDungRestController {
 	
 	@GetMapping("{id}")
 	public ResponseEntity<NguoiDung> restGetNdById(@PathVariable("id") String id){
-		Optional<NguoiDung> nd = ndDao.findById(id);
+		Optional<NguoiDung> nd = ndService.findById(id);
 		if(nd.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(nd.get());
 	}
 	
+	//Thống kê số lượng khách hàng
 	@GetMapping("SoLuongKhachHang")
 	public ResponseEntity<Integer> restGetSoLuongKhachHang(){
-		List<NguoiDung> listKh = ndDao.findAllByVaiTroLike("Khách hàng");
-		return ResponseEntity.ok(listKh.size());
+		int soLuong = ndService.getSoLuongKhachHang();
+		return ResponseEntity.ok(soLuong);
 	}
 	
 	@PostMapping()
 	public ResponseEntity<NguoiDung> restPostNguoiDung(@RequestBody NguoiDung nd ){
-		if(ndDao.existsById(nd.getMaNguoiDung())) {
+		if(ndService.existsById(nd.getMaNguoiDung())) {
 			return ResponseEntity.badRequest().build();
 		}
-		ndDao.save(nd);
+		ndService.save(nd);
 		return ResponseEntity.ok(nd);
 	}
 	
 	@PutMapping("{id}")
 	public ResponseEntity<NguoiDung> restPutNguoiDung(@RequestBody NguoiDung nd, @PathVariable("id") String id){
-		Optional<NguoiDung> nguoiDung = ndDao.findById(id);
+		Optional<NguoiDung> nguoiDung = ndService.findById(id);
 		if(nguoiDung.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
-		ndDao.save(nd);
+		ndService.save(nd);
 		return ResponseEntity.ok(nd);
 	}
 	
 	@DeleteMapping("{id}")
 	public ResponseEntity<Void> restDeleteNguoiDung(@PathVariable("id") String id){
-		if(!ndDao.existsById(id)) {
+		if(!ndService.existsById(id)) {
 			return ResponseEntity.notFound().build();
 		}
-		ndDao.deleteById(id);
+		ndService.deleteById(id);
 		return ResponseEntity.ok().build();
 	}
 	

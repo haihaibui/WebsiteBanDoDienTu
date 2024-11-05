@@ -12,15 +12,10 @@ import com.group4.entity.NguoiDung;
 import com.group4.service.NguoiDungService;
 
 @Service
-public class NguoiDungServiceImp implements NguoiDungService{
+public class NguoiDungServiceImp implements NguoiDungService {
 
 	@Autowired
 	NguoiDungDAO ndDao;
-	
-	@Override
-	public List<SoLuongKhachDangKyTheoThangDTO> getTkSoLuongKhachDangKyTheoThang() {
-		return ndDao.getThongKeKhachDangKyTheoThang();
-	}
 
 	@Override
 	public List<NguoiDung> findAll() {
@@ -37,4 +32,26 @@ public class NguoiDungServiceImp implements NguoiDungService{
 		return ndDao.existsById(id);
 	}
 	
+	@Override
+	public NguoiDung save(NguoiDung nd) {
+		return ndDao.save(nd);
+	}
+	
+	@Override
+	public void deleteById(String id) {
+		ndDao.deleteById(id);
+	}
+	
+	//Thống kê số lượng khách hàng
+	@Override
+	public int getSoLuongKhachHang() {
+		return ndDao.findAllByVaiTroLike("Khách hàng").size();
+	}
+
+	// Thống kê số lượng khách đăng ký theo tháng
+	@Override
+	public List<SoLuongKhachDangKyTheoThangDTO> getTkSoLuongKhachDangKyTheoThang() {
+		return ndDao.getThongKeKhachDangKyTheoThang();
+	}
+
 }
