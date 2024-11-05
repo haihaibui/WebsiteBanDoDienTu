@@ -22,7 +22,7 @@ public class DonHangChiTiet {
     private Integer soLuong;
 
     @Column(name = "gia_tien", nullable = false)
-    private Float giaTien;
+    private int giaTien;
 
     @Column(name = "ma_sp", nullable = false, length = 20)
     private String maSp;

@@ -6,7 +6,6 @@
 </head>
 <body>
     <div class="container">
-        <a href="/lichsudathang" class="back-button">Quay lại</a>
         
         <h2>Chi Tiết Đơn Hàng</h2>
         
@@ -15,10 +14,11 @@
         <table>
             <thead>
                 <tr>
-                    <th>Sản phẩm</th>
-                    <th>Tên sản phẩm</th>
-                    <th>Số lượng</th>
-                    <th>Giá tiền</th>
+                    <th style="color: black;">Sản phẩm</th>
+                    <th style="color: black;">Tên sản phẩm</th>
+                    <th style="color: black;">Số lượng</th>
+                    <th style="color: black;">Giá tiền</th>
+                    <th style="color: black;">Tổng tiền</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,6 +27,7 @@
                     <td th:text="${chiTiet.sanPham.tenSanPham}"></td> 
                     <td th:text="${chiTiet.soLuong}"></td>
                     <td th:text="${chiTiet.giaTien}"><a style="color: black;">VNĐ</a></td>
+                    <td th:text="${chiTiet.giaTien * chiTiet.soLuong}"><a style="color: black;">VNĐ</a></td>
                 </tr>
             </tbody>
         </table>
