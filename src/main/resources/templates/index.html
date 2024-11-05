@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+	
+	<div th:replace="~{/layout/test}"></div>
+	<div th:replace="${content}"></div>
+	
+	
+	<script src="https://kit.fontawesome.com/c6bc02ad3b.js"
+		crossorigin="anonymous"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>	
+	<script src="@{/vendor/angular/Angular.min.js}"></script>
+	<script src="@{/vendor/angular/Angular-route.min.js}"></script>
+</body>
+</html>
