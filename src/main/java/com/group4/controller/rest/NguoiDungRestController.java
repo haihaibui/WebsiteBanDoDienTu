@@ -48,7 +48,7 @@ public class NguoiDungRestController {
 	
 	//Thống kê số lượng khách hàng
 	@GetMapping("SoLuongKhachHang")
-	public ResponseEntity<Integer> restGetSoLuongKhachHang(){
+	public ResponseEntity<Integer> restGetSoLuongKhachHang(){	
 		int soLuong = ndService.getSoLuongKhachHang();
 		return ResponseEntity.ok(soLuong);
 	}
